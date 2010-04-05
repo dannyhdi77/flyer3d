@@ -16,12 +16,13 @@ int game_init(game_t *g){
 	//haha
 	g->angle_step_x = 0.0;
 	g->angle_step_y = 0.0;
+	g->fspeed = 0.0;
 
 	body_init(&g->air,model_load("data/StarCruiser.obj"), DISP_MODEL);
-	vector3_t airpos = {0.0,0.0,-10.0};
+	vector3_t airpos = {1.0,0.0,-10.0};
 	vector3_set_v(g->air.position, airpos);
 	vector3_set_v(airpos, g->air.forward);
-	vector3_rotate(g->air.forward, g->air.up, 3.14159265/4.0 , airpos);
+//	vector3_rotate(g->air.forward, g->air.up, 3.14159265/4.0);
 
 
 
@@ -95,11 +96,22 @@ void game_react(game_t* g, SDL_Event *ev){
 			}
 		}
 	}
+	else if(ev->type == SDL_JOYBUTTONDOWN){
+		if(ev->jbutton.button == 4){
+			g->fspeed = FSPEED;
+		}
+	}
+	else if(ev->type == SDL_JOYBUTTONUP){
+		if(ev->jbutton.button == 4){
+			g->fspeed = 0;
+		}
+	}
 }
 
 //refreshes game content, physics is done here
 //last parameter is time from start of app
 void game_refresh(game_t* g, int t){
-	g->camera.position[2] += g->angle_step_y;
-	g->camera.position[0] += g->angle_step_x;
+	body_rotate(&g->air, B_OUT, g->angle_step_y);
+	body_rotate(&g->air, B_UP, g->angle_step_x);
+	body_move_forward(&g->air, g->fspeed);
 }

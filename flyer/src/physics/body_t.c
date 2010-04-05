@@ -10,10 +10,8 @@
 void body_init(body_t* b, void* data, char type){
 	b->model.data = data;
 	b->model.type = type;
-	b->x_angle = 0.0;
-	b->y_angle = 0.0;
 	vector3_set(b->position, 0.0, 0.0, 0.0);
-	vector3_set(b->forward, 0.0, 0.0, 1.0);
+	vector3_set(b->forward, 1.0, 0.0, 0.0);
 	vector3_set(b->up, 0.0, 1.0, 0.0);
 }
 
@@ -31,9 +29,9 @@ void body_apply_transform(body_t* obj){
 
 //needed by inverted transform, simply invertes vectors
 void body_frame_invert(body_t* b){
-	vector3_invert(&b->position);
-	vector3_invert(&b->up);
-	vector3_invert(&b->forward);
+	vector3_invert(b->position);
+	vector3_invert(b->up);
+	vector3_invert(b->forward);
 }
 
 //apply inverted object transform
@@ -45,5 +43,32 @@ void body_apply_inverted_transform(body_t* b){
 
 //sets body position
 void body_set_position(body_t* b, vector3_t v){
-	vector3_set(&b->position, v[0], v[1], v[2]);
+	vector3_set(b->position, v[0], v[1], v[2]);
+}
+
+//rotates body around given axis, angle in radians
+void body_rotate(body_t* b, char axis, float angle){
+	if(axis == B_FORWARD){
+		vector3_rotate(b->up, b->forward, angle);
+	}
+	else if(axis == B_UP){
+		vector3_rotate(b->forward, b->up, angle);
+	}
+	else{
+		vector3_t out;
+		vector3_cross_product(out, b->up, b->forward);
+		vector3_rotate(b->forward, out, angle);
+		vector3_rotate(b->up, out, angle);
+	}
+	vector3_normalize(b->forward);
+	printf("%f %f %f\n", b->forward[0], b->forward[1], b->forward[2]);
+	vector3_normalize(b->up);
+}
+
+//moves body forward
+void body_move_forward(body_t* b, float x){
+	vector3_t dx;
+	vector3_set_v(dx, b->forward);
+	vector3_scale(dx, x);
+	vector3_add(b->position, dx);
 }

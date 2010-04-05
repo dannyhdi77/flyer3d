@@ -16,7 +16,8 @@
 #include <default_game_renderer_settings.h>
 #include <body_t.h>
 
-#define ANGLE_STEP 0.1
+#define ANGLE_STEP 0.005
+#define FSPEED 0.01
 
 typedef struct{
 	renderer_t renderer;	//renderer for game graphics
@@ -24,6 +25,7 @@ typedef struct{
 
 	float angle_step_x ;
 	float angle_step_y ;
+	float fspeed ;
 
 	body_t air;
 	body_t terrain;

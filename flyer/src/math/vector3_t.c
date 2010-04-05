@@ -53,8 +53,23 @@ void vector3_invert(vector3_t v){
 	v[2] = -v[2];
 }
 
+//multiplies vector by scalar
+void vector3_scale(vector3_t v, float k){
+	v[0] *= k;
+	v[1] *= k;
+	v[2] *= k;
+}
+
+//adds vector to a vector
+void vector3_add(vector3_t v, vector3_t b){
+	v[0] += b[0];
+	v[1] += b[1];
+	v[2] += b[2];
+}
+
+
 //rotates vector around specified axis
-void vector3_rotate(vector3_t result, vector3_t axis, float angle, vector3_t v){
+void vector3_rotate(vector3_t result, vector3_t axis, float angle){
 	//some values for easier notation
 	float c = cos(angle);
 	float s = sin(angle);
@@ -71,6 +86,8 @@ void vector3_rotate(vector3_t result, vector3_t axis, float angle, vector3_t v){
 	};
 	//actual multiplication
 	int i,k;
+	vector3_t v;
+	vector3_set_v(v, result);
 	vector3_set(result, 0.0,0.0,0.0);
 	for(i=0 ; i<3 ; i++)
 		for(k = 0; k<3 ; k++)

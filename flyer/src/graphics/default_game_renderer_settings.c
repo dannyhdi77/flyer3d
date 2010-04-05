@@ -23,9 +23,9 @@ void default_game_renderer_settings(renderer_t *r){
 	r->projection = REND_PERSPECTIVE;
 	r->far = 400.0;
 	r->near = 1.0;
-	r->view_angle = 60.0;
+	r->view_angle = 35.0;
 
-	r->shade_model = GL_FLAT;
+	r->shade_model = GL_SMOOTH;
 
 	r->ambient_color[0] = 1.0;
 	r->ambient_color[1] = 1.0;
