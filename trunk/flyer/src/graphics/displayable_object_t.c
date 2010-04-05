@@ -9,27 +9,21 @@
 //initalizes object with specified data
 void d_object_init(displayable_object_t* d, void* p){
 	d->data = p;
-	d->x_angle = 0.0;
-	d->y_angle = 0.0;
-	vector3_set(d->position, 0.0, 0.0, 0.0);
-	vector3_set(d->forward, 0.0, 0.0, 1.0);
-	vector3_set(d->up, 0.0, 1.0, 0.0);
-}
-
-//apply object transform
-void d_object_apply_transform(displayable_object_t* obj, void* r){
-	vector3_t x_axis;
-	vector3_cross_product(x_axis, obj->up, obj->forward);
-	float transform_matrix[16] = {x_axis[0],x_axis[1],x_axis[2], 0,
-			0,1,0,0,
-			0,0,1,0,
-			obj->position[0],obj->position[1],obj->position[2],1};
-	glMultMatrixf(transform_matrix);
 }
 
 //draw object
-void d_object_display(displayable_object_t* obj, void* r){
+void d_object_display(displayable_object_t* obj){
 	if(obj->type == DISP_MODEL){
 		model_display(obj->data);
+	}
+	else if(obj->type == DISP_TERRAIN){
+		int i;
+		glColor3f(0.0, 1.0, 0.0);
+		glBegin(GL_LINES);
+		for(i=0 ; i<50; i++){
+			glVertex3f(-1000.0, -5.0, -i*2.0);
+			glVertex3f(1000.0, -5.0, -i*2.0);
+		}
+		glEnd();
 	}
 }

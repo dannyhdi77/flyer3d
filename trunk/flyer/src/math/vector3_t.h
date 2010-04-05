@@ -26,5 +26,7 @@ void vector3_cross_product(vector3_t c, vector3_t a, vector3_t b);
 //sets vector coordinates
 void vector3_set(vector3_t v, float, float, float);
 
+//inverts vector coordinates
+void vector3_invert(vector3_t);
 
 #endif /* VECTOR3_T_H_ */

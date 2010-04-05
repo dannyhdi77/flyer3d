@@ -14,6 +14,7 @@
 #include <displayable_object_t.h>
 #include <math.h>
 #include <default_game_renderer_settings.h>
+#include <body_t.h>
 
 #define ANGLE_STEP 0.1
 
@@ -24,7 +25,9 @@ typedef struct{
 	float angle_step_x ;
 	float angle_step_y ;
 
-	displayable_object_t cone,model;
+	body_t air;
+	body_t terrain;
+	body_t camera;
 	light_t light;	//something to illuminate the scene
 } game_t;
 
