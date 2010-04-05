@@ -13,11 +13,11 @@ void default_game_renderer_settings(renderer_t *r){
 	r->window_width = 1200;
 	r->window_bpp = 8;
 
-	r->base_clip_size = 10.0;
-	r->clip_depth = 10.0;
+	r->base_clip_size = 20.0;
+	r->clip_depth = 20.0;
 
 	r->video_mode_flags = SDL_OPENGL | SDL_RESIZABLE;
-	r->renderer_flags = REND_DEPTH_TEST | REND_LIGHTS ;
+	r->renderer_flags = REND_DEPTH_TEST | REND_LIGHTS;
 	r->winding = GL_CCW;
 
 	r->projection = REND_PERSPECTIVE;

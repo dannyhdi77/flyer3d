@@ -28,7 +28,7 @@ void vector3_normalize(vector3_t v){
 //c = a x b
 void vector3_cross_product(vector3_t c, vector3_t a, vector3_t b){
 	c[0] = a[1]*b[2] - a[2]*b[1];
-	c[1] = a[0]*b[2] - a[2]*b[0];
+	c[1] = a[2]*b[0] - a[0]*b[2];
 	c[2] = a[0]*b[1] - a[1]*b[0];
 }
 
