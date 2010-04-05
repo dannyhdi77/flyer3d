@@ -32,12 +32,6 @@ int game_init(game_t *g){
 	vector3_t posit = {-1.0, 1.0, 1.0};
 	body_set_position(&g->camera,posit);
 
-//	float color[] = {1.0, 1.0, 1.0, 1.0};
-//	glLightfv(GL_LIGHT0, GL_DIFFUSE, color);
-/*	float position[] = {10.0, 10.0, 0.0};
-	glLightfv(GL_LIGHT0, GL_POSITION, position);
-	glEnable(GL_LIGHT0);
-*/
 
 	//turn on the light
 	vector3_t pos = {0.0, 10.0, 0.0};
@@ -111,7 +105,7 @@ void game_react(game_t* g, SDL_Event *ev){
 //refreshes game content, physics is done here
 //last parameter is time from start of app
 void game_refresh(game_t* g, int t){
-	body_rotate(&g->air, B_OUT, g->angle_step_y);
-	body_rotate(&g->air, B_UP, g->angle_step_x);
-	body_move_forward(&g->air, g->fspeed);
+	body_rotate(&g->camera, B_OUT, g->angle_step_y);
+	body_rotate(&g->camera, B_UP, g->angle_step_x);
+	body_move_forward(&g->camera, g->fspeed);
 }
