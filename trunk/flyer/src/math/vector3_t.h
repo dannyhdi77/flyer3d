@@ -33,6 +33,14 @@ void vector3_set_v(vector3_t v, vector3_t src);
 void vector3_invert(vector3_t);
 
 //rotates vector around specified axis
-void vector3_rotate(vector3_t result, vector3_t axis, float angle, vector3_t v);
+void vector3_rotate(vector3_t result, vector3_t axis, float angle);
+
+//multiplies vector by scalar
+void vector3_scale(vector3_t, float);
+
+//adds vector to a vector
+void vector3_add(vector3_t, vector3_t);
+
+//rotates vector around specified axis, and
 
 #endif /* VECTOR3_T_H_ */

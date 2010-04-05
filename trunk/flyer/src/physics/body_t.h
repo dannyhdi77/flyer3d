@@ -19,9 +19,6 @@ typedef struct {
 	vector3_t up;	//vector pointing up from the object
 	vector3_t forward;	//vector pointing forward, both for orientation
 
-	//temporary
-	float x_angle;
-	float y_angle;
 } body_t;
 
 //boring initalization
@@ -35,5 +32,14 @@ void body_apply_transform(body_t*);
 
 //apply inverted object transform
 void body_apply_inverted_transform(body_t*);
+
+//rotates body around given axis, angle in radians
+#define B_FORWARD 1
+#define B_UP 2
+#define B_OUT 3
+void body_rotate(body_t* b, char axis, float angle);
+
+//moves body forward
+void body_move_forward(body_t*, float);
 
 #endif /* BODY_T_H_ */
