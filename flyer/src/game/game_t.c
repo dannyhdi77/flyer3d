@@ -17,9 +17,14 @@ int game_init(game_t *g){
 	g->angle_step_x = 0.0;
 	g->angle_step_y = 0.0;
 
-	g->model.type = DISP_MODEL;
-	d_object_init(&g->model,model_load("data/StarCruiser.obj"));
-	g->model.position[2] = -10.0;
+	body_init(&g->air,model_load("data/StarCruiser.obj"), DISP_MODEL);
+	g->air.position[2] = -10.0;
+
+	body_init(&g->terrain, NULL, DISP_TERRAIN);
+
+	body_init(&g->camera,NULL, DISP_NONE);
+	vector3_t posit = {-1.0, 1.0, 1.0};
+	body_set_position(&g->camera,posit);
 
 //	float color[] = {1.0, 1.0, 1.0, 1.0};
 //	glLightfv(GL_LIGHT0, GL_DIFFUSE, color);
@@ -48,7 +53,10 @@ void game_delete(game_t* g){
 //displays game content on screen
 void game_render(game_t* g){
 	renderer_start(&g->renderer);
-	renderer_display(&g->renderer,&g->model);
+	//apply camera transform
+	body_apply_inverted_transform(&g->camera);
+	renderer_display(&g->renderer,&g->air);
+	renderer_display(&g->renderer,&g->terrain);
 	renderer_finish(&g->renderer);
 }
 
@@ -87,6 +95,6 @@ void game_react(game_t* g, SDL_Event *ev){
 //refreshes game content, physics is done here
 //last parameter is time from start of app
 void game_refresh(game_t* g, int t){
-	g->model.x_angle += g->angle_step_x;
-	g->model.y_angle += g->angle_step_y;
+	g->camera.position[2] += g->angle_step_y;
+	g->camera.position[0] += g->angle_step_x;
 }

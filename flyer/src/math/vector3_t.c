@@ -38,3 +38,10 @@ void vector3_set(vector3_t v, float x, float y, float z){
 	v[1] = y;
 	v[2] = z;
 }
+
+//inverts vector coordinates
+void vector3_invert(vector3_t v){
+	v[0] = -v[0];
+	v[1] = -v[1];
+	v[2] = -v[2];
+}

@@ -16,6 +16,7 @@
 #include <SDL/SDL.h>
 
 #include <list_t.h>
+#include <body_t.h>
 #include <displayable_object_t.h>
 #include <light_t.h>
 
@@ -89,6 +90,6 @@ void renderer_start(renderer_t*);
 void renderer_finish(renderer_t*);
 
 //adds object to rendering queue
-void renderer_display(renderer_t*, displayable_object_t*);
+void renderer_display(renderer_t*, body_t*);
 
 #endif /* RENDERER_T_H_ */

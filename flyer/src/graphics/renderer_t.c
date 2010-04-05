@@ -3,7 +3,7 @@
 //initalizes renderer
 int renderer_init(renderer_t* r){
 	r->screen = NULL;
-	list_init(&(r->rendering_queue), sizeof(displayable_object_t*), NULL);
+	list_init(&(r->rendering_queue), sizeof(body_t*), NULL);
 	return 0 ;
 }
 
@@ -90,15 +90,16 @@ void renderer_resize(renderer_t* r, int w, int h){
 void renderer_start(renderer_t* r){
 	//delete old list, create new
 	list_delete(&r->rendering_queue);
-	list_init(&r->rendering_queue,sizeof(displayable_object_t*),NULL);
+	list_init(&r->rendering_queue,sizeof(body_t*),NULL);
+	//save matrix state
+	glPushMatrix();
 }
 
-void renderer_draw_object(void * vobj, void* renderer){
-	displayable_object_t *obj = *(displayable_object_t**)vobj;
-	renderer_t* r = (renderer_t*) renderer;
+void renderer_draw_object(void * vobj){
+	body_t *obj = *(body_t**)vobj;
 	glPushMatrix();	//save matrix state
-		d_object_apply_transform(obj, r);
-		d_object_display(obj, r);
+		body_apply_transform(obj);
+		d_object_display(&obj->model);
 	glPopMatrix();
 }
 
@@ -110,13 +111,16 @@ void renderer_finish(renderer_t* r){
 	glMatrixMode(GL_MODELVIEW);
 
 	//draw everything from the queue
-	list_iterate(&r->rendering_queue, &renderer_draw_object, r);
+	list_iterate(&r->rendering_queue, &renderer_draw_object, NULL);
 
 	glFlush();
 	SDL_GL_SwapBuffers();
+
+	//restore matrix state
+	glPopMatrix();
 }
 
 //adds object to rendering queue
-void renderer_display(renderer_t* r, displayable_object_t* obj){
+void renderer_display(renderer_t* r, body_t* obj){
 	list_insert(&r->rendering_queue, &obj);
 }

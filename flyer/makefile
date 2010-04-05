@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -g -Wall
 
 INCDIRS = -I/usr/X11R6/include `sdl-config --cflags` \
--Isrc -Isrc/graphics -Isrc/general -Isrc/math -Isrc/game
+-Isrc -Isrc/graphics -Isrc/general -Isrc/math -Isrc/game -Isrc/physics
 
 LIBDIRS = -L/usr/X11R6/	`sdl-config --libs`
  
@@ -18,9 +18,11 @@ OBJS = $(OBJDIR)/main.o	\
 	$(OBJDIR)/general/game_system_t.o \
 	$(OBJDIR)/game/game_t.o \
 	$(OBJDIR)/math/vector3_t.o \
+	$(OBJDIR)/math/matrix44_t.o \
 	$(OBJDIR)/graphics/displayable_object_t.o \
 	$(OBJDIR)/graphics/light_t.o \
-	$(OBJDIR)/graphics/default_game_renderer_settings.o
+	$(OBJDIR)/graphics/default_game_renderer_settings.o\
+	$(OBJDIR)/physics/body_t.o \
 
 all:	flyer
 

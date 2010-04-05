@@ -9,8 +9,8 @@
 #include "default_game_renderer_settings.h"
 
 void default_game_renderer_settings(renderer_t *r){
-	r->window_height = 600;
-	r->window_width = 800;
+	r->window_height = 700;
+	r->window_width = 1200;
 	r->window_bpp = 8;
 
 	r->base_clip_size = 10.0;
