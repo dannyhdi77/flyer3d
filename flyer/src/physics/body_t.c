@@ -45,15 +45,29 @@ void body_apply_transform(body_t* obj){
 //needed by inverted transform, simply invertes vectors
 void body_frame_invert(body_t* b){
 	vector3_invert(b->position);
-	//vector3_invert(b->up);
-	//vector3_invert(b->forward);
+	vector3_invert(b->up);
+	vector3_invert(b->forward);
 }
 
 //apply inverted object transform
-void body_apply_inverted_transform(body_t* b){
-	body_frame_invert(b);
-	body_apply_transform(b);
-	body_frame_invert(b);	//back to normal state
+void body_apply_inverted_transform(body_t* obj){
+	//compute x axis vector
+	vector3_t x_axis;
+	vector3_cross_product(x_axis, obj->up, obj->forward);
+
+	//create and apply transform matrix, but this time transposed
+	matrix44_t transform;
+	matrix44_set_row(transform, 0, x_axis, 0.0);
+	matrix44_set_row(transform, 1, obj->up, 0.0);
+	matrix44_set_row(transform, 2, obj->forward, 0.0);
+	//last row
+	transform[3] = 0.0;
+	transform[7] = 0.0;
+	transform[11] = 0.0;
+	transform[15] = 1.0;
+
+	glMultMatrixf(transform);
+	glTranslatef(-obj->position[0],-obj->position[1],-obj->position[2]);
 }
 
 //sets body position
@@ -76,7 +90,6 @@ void body_rotate(body_t* b, char axis, float angle){
 		vector3_rotate(b->up, out, angle);
 	}
 	vector3_normalize(b->forward);
-	printf("%f %f %f\n", b->forward[0], b->forward[1], b->forward[2]);
 	vector3_normalize(b->up);
 }
 

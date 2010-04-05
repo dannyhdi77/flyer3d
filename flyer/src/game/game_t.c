@@ -108,4 +108,5 @@ void game_refresh(game_t* g, int t){
 	body_rotate(&g->camera, B_OUT, g->angle_step_y);
 	body_rotate(&g->camera, B_UP, g->angle_step_x);
 	body_move_forward(&g->camera, g->fspeed);
+	printf("%f %f %f\n",g->camera.position[0], g->camera.position[1], g->camera.position[2] );
 }
