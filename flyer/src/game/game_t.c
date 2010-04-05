@@ -18,7 +18,12 @@ int game_init(game_t *g){
 	g->angle_step_y = 0.0;
 
 	body_init(&g->air,model_load("data/StarCruiser.obj"), DISP_MODEL);
-	g->air.position[2] = -10.0;
+	vector3_t airpos = {0.0,0.0,-10.0};
+	vector3_set_v(g->air.position, airpos);
+	vector3_set_v(airpos, g->air.forward);
+	vector3_rotate(g->air.forward, g->air.up, 3.14159265/4.0 , airpos);
+
+
 
 	body_init(&g->terrain, NULL, DISP_TERRAIN);
 

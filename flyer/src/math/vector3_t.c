@@ -39,9 +39,40 @@ void vector3_set(vector3_t v, float x, float y, float z){
 	v[2] = z;
 }
 
+//sets vector to be equal to other vector
+void vector3_set_v(vector3_t v, vector3_t src){
+	v[0] = src[0];
+	v[1] = src[1];
+	v[2] = src[2];
+}
+
 //inverts vector coordinates
 void vector3_invert(vector3_t v){
 	v[0] = -v[0];
 	v[1] = -v[1];
 	v[2] = -v[2];
+}
+
+//rotates vector around specified axis
+void vector3_rotate(vector3_t result, vector3_t axis, float angle, vector3_t v){
+	//some values for easier notation
+	float c = cos(angle);
+	float s = sin(angle);
+	float t = 1-cos(angle);
+	//algebra says: we have to do it
+	vector3_t a = {axis[0], axis[1], axis[2]};
+	vector3_normalize(a);
+	//transformation matrix, it is too complicated to tell here how it is
+	//derieved, for reference visit : http://www.gamedev.net/reference/articles/article1199.asp
+	float rotation_matrix[3][3] = {
+			{t*a[0]*a[0] + c     , t*a[0]*a[1] - s*a[2], t*a[0]*a[2] + s*a[1]},
+			{t*a[0]*a[1] + s*a[2], t*a[1]*a[1] + c,      t*a[1]*a[2] - s*a[0]},
+			{t*a[0]*a[2] - s*a[1], t*a[1]*a[2] + s*a[0], t*a[2]*a[2] + c}
+	};
+	//actual multiplication
+	int i,k;
+	vector3_set(result, 0.0,0.0,0.0);
+	for(i=0 ; i<3 ; i++)
+		for(k = 0; k<3 ; k++)
+			result[i] += rotation_matrix[k][i]*v[k];
 }
