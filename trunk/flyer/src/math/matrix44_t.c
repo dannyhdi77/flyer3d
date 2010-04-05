@@ -16,6 +16,15 @@ void matrix44_set_column(matrix44_t m, int n, vector3_t v, float x){
 	m[n+3] = x;
 }
 
+//sets n th matrix row to 3d vector and number
+void matrix44_set_row(matrix44_t m, int n , vector3_t v, float x){
+	m[n] = v[0];
+	m[n+4] = v[1];
+	m[n+8] = v[2];
+	m[n+12] = x;
+}
+
+
 /*composes matrix from given vectors (a,b,c), (d,e,f)
  * (g,h,i), (j,k,l) and values X...
  *

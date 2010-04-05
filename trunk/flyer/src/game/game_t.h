@@ -17,7 +17,7 @@
 #include <body_t.h>
 
 #define ANGLE_STEP 0.005
-#define FSPEED 0.01
+#define FSPEED -0.1
 
 typedef struct{
 	renderer_t renderer;	//renderer for game graphics

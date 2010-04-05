@@ -13,7 +13,10 @@
 typedef float matrix44_t[16];
 
 //sets n th matrix column to 3d vector and number
-void matrix44_set_column(matrix44_t, int, vector3_t, float);
+void matrix44_set_column(matrix44_t m, int n , vector3_t v, float x);
+
+//sets n th matrix row to 3d vector and number
+void matrix44_set_row(matrix44_t m, int n , vector3_t v, float x);
 
 /*composes matrix from given vectors (a,b,c), (d,e,f)
  * (g,h,i), (j,k,l) and values X...
