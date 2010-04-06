@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -g -Wall
+CFLAGS = -g -Wall --std=ansi
 
 INCDIRS = -I/usr/X11R6/include `sdl-config --cflags` \
 -Isrc -Isrc/graphics -Isrc/general -Isrc/math -Isrc/game -Isrc/physics
@@ -17,6 +17,7 @@ OBJS = $(OBJDIR)/main.o	\
 	$(OBJDIR)/graphics/renderer_t.o \
 	$(OBJDIR)/general/game_system_t.o \
 	$(OBJDIR)/game/game_t.o \
+	$(OBJDIR)/game/control_hadler_t.o \
 	$(OBJDIR)/math/vector3_t.o \
 	$(OBJDIR)/math/matrix44_t.o \
 	$(OBJDIR)/graphics/displayable_object_t.o \
