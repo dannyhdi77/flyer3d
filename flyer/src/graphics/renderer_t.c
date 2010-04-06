@@ -110,6 +110,9 @@ void renderer_finish(renderer_t* r){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);
 
+	//apply camera transform
+	body_apply_inverted_transform(r->camera);
+
 	//draw everything from the queue
 	list_iterate(&r->rendering_queue, &renderer_draw_object, NULL);
 
@@ -123,4 +126,9 @@ void renderer_finish(renderer_t* r){
 //adds object to rendering queue
 void renderer_display(renderer_t* r, body_t* obj){
 	list_insert(&r->rendering_queue, &obj);
+}
+
+//sets renderer camera(point of view)
+void renderer_set_camera(renderer_t* r, body_t* camera){
+	r->camera = camera;
 }

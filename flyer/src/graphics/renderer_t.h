@@ -67,6 +67,7 @@ typedef struct{
 
 	//list of objects to render
 	list_t rendering_queue;
+	body_t *camera;
 
 } renderer_t;
 
@@ -91,5 +92,8 @@ void renderer_finish(renderer_t*);
 
 //adds object to rendering queue
 void renderer_display(renderer_t*, body_t*);
+
+//sets renderer camera(point of view)
+void renderer_set_camera(renderer_t*, body_t*);
 
 #endif /* RENDERER_T_H_ */
