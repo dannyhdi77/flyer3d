@@ -54,7 +54,7 @@ void game_delete(game_t* g){
 void game_render(game_t* g){
 	renderer_start(&g->renderer);
 	//apply camera transform
-	body_apply_inverted_transform(&g->camera);
+	renderer_set_camera(&g->camera);
 	renderer_display(&g->renderer,&g->air);
 	renderer_display(&g->renderer,&g->terrain);
 	renderer_finish(&g->renderer);
