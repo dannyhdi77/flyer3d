@@ -22,6 +22,7 @@
 typedef struct{
 	renderer_t renderer;	//renderer for game graphics
 	game_system_t *system;	//for state changes, etc.
+	control_handler_t control;	//key bindings
 
 	float angle_step_x ;
 	float angle_step_y ;

@@ -16,6 +16,15 @@ typedef char control_handler_t[CONTROL_HANDLER_SIZE];
 
 //player action definitions
 
+
+//event indexes
+#define CH_JOYAXIS_0 0
+#define CH_JOYAXIS_PLUS 10
+#define CH_JOYAXIS_MINUS 20
+
+#define CH_JOYBUTTON_DOWN 30
+#define CH_JOYBUTTON_UP 45
+
 //translates event into player action
 char control_translate(control_handler_t, SDL_Event *ev);
 
