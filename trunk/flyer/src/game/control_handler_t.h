@@ -10,7 +10,7 @@
 
 #include <SDL/SDL.h>
 
-#define CONROL_HANDLER_SIZE 50
+#define CONTROL_HANDLER_SIZE 50
 
 typedef char control_handler_t[CONTROL_HANDLER_SIZE];
 

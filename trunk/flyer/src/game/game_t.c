@@ -54,7 +54,7 @@ void game_delete(game_t* g){
 void game_render(game_t* g){
 	renderer_start(&g->renderer);
 	//apply camera transform
-	renderer_set_camera(&g->camera);
+	renderer_set_camera(&g->renderer, &g->camera);
 	renderer_display(&g->renderer,&g->air);
 	renderer_display(&g->renderer,&g->terrain);
 	renderer_finish(&g->renderer);
@@ -99,6 +99,10 @@ void game_react(game_t* g, SDL_Event *ev){
 		if(ev->jbutton.button == 4){
 			g->fspeed = 0;
 		}
+	}
+	else if(ev->type == SDL_KEYDOWN){
+		printf("screenshot!\n");
+		renderer_screenshot(&g->renderer,"skrin.bmp");
 	}
 }
 
