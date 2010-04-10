@@ -3,6 +3,7 @@
 //initalizes renderer
 int renderer_init(renderer_t* r){
 	r->screen = NULL;
+	r->screenshot_file_name = NULL;
 	list_init(&(r->rendering_queue), sizeof(body_t*), NULL);
 	return 0 ;
 }
@@ -11,6 +12,9 @@ int renderer_init(renderer_t* r){
 void renderer_delete(renderer_t* r){
 	//we delete only dynamic data structure
 	list_delete(&r->rendering_queue);
+
+	//we delete screenshot filename
+	free(r->screenshot_file_name);
 }
 
 void renderer_reload(renderer_t* r){
@@ -117,6 +121,20 @@ void renderer_finish(renderer_t* r){
 	list_iterate(&r->rendering_queue, &renderer_draw_object, NULL);
 
 	glFlush();
+
+	//if screenshot was requested, make it
+	if(r->screenshot_file_name != NULL){
+		SDL_Surface *screenshot = SDL_CreateRGBSurface(SDL_HWSURFACE, r->window_width,
+				r->window_height, 24, 0xff0000, 0x00ff00, 0x0000ff, 0x000000);
+
+		glReadPixels(0,0,r->window_width, r->window_height, GL_BGR, GL_UNSIGNED_BYTE, screenshot->pixels);
+		SDL_SaveBMP(screenshot, r->screenshot_file_name);
+		SDL_FreeSurface(screenshot);
+		free(r->screenshot_file_name);
+		r->screenshot_file_name = NULL;
+	}
+
+	//display everything on screen
 	SDL_GL_SwapBuffers();
 
 	//restore matrix state
@@ -131,4 +149,10 @@ void renderer_display(renderer_t* r, body_t* obj){
 //sets renderer camera(point of view)
 void renderer_set_camera(renderer_t* r, body_t* camera){
 	r->camera = camera;
+}
+
+//saves screenshot to a file of given name
+void renderer_screenshot(renderer_t* r, const char *filename){
+	r->screenshot_file_name = (char*)malloc(strlen(filename) + 1);
+	strcpy(r->screenshot_file_name, filename);
 }

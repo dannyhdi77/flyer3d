@@ -16,11 +16,11 @@
 int control_event_index(SDL_Event *ev){
 	if(ev->type == SDL_JOYAXISMOTION){
 		if(ev->jaxis.value == 0)
-			return CH_JOAXIS_0 + ev->jaxis.axis;
+			return CH_JOYAXIS_0 + ev->jaxis.axis;
 		else if(ev->jaxis.value > 0)
-			return CH_JOAXIS_PLUS + ev->jaxis.axis;
+			return CH_JOYAXIS_PLUS + ev->jaxis.axis;
 		else if(ev->jaxis.value < 0)
-			return CH_JOAXIS_MINUS + ev->jaxis.axis;
+			return CH_JOYAXIS_MINUS + ev->jaxis.axis;
 	}
 	else if(ev->type == SDL_JOYBUTTONDOWN){
 		return CH_JOYBUTTON_DOWN + ev->jbutton.button;

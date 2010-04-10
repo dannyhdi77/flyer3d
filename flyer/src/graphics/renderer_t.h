@@ -19,6 +19,7 @@
 #include <body_t.h>
 #include <displayable_object_t.h>
 #include <light_t.h>
+#include <string.h>
 
 //renderer flags
 //type of projection
@@ -69,6 +70,9 @@ typedef struct{
 	list_t rendering_queue;
 	body_t *camera;
 
+	//data for screenshot creation
+	char* screenshot_file_name;
+
 } renderer_t;
 
 //initalizes renderer structure
@@ -95,5 +99,8 @@ void renderer_display(renderer_t*, body_t*);
 
 //sets renderer camera(point of view)
 void renderer_set_camera(renderer_t*, body_t*);
+
+//saves screenshot to a file of given name
+void renderer_screenshot(renderer_t*, const char *);
 
 #endif /* RENDERER_T_H_ */

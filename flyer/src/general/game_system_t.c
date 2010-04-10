@@ -14,6 +14,7 @@ int game_system_init(game_system_t* sys){
 		exit(0);
 	}
 
+	//depth and color buffer properities
 	SDL_GL_SetAttribute( SDL_GL_RED_SIZE, 8 );
 	SDL_GL_SetAttribute( SDL_GL_GREEN_SIZE, 8 );
 	SDL_GL_SetAttribute( SDL_GL_BLUE_SIZE, 8 );
