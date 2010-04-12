@@ -18,11 +18,9 @@ int game_init(game_t *g){
 	g->angle_step_y = 0.0;
 	g->fspeed = 0.0;
 
-	body_init(&g->air,model_load("data/StarCruiser.obj"), DISP_MODEL);
-	vector3_t airpos = {1.0,0.0,-10.0};
-	vector3_set_v(g->air.position, airpos);
-	vector3_set_v(airpos, g->air.forward);
-//	vector3_rotate(g->air.forward, g->air.up, 3.14159265/4.0);
+	g->player_model = model_load("data/StarCruiser.obj");
+	aircraft_init(&g->player, g->player_model);
+	aircraft_load_test_settings(&g->player);
 
 
 
@@ -48,6 +46,7 @@ int game_init(game_t *g){
 //deletes game structure
 void game_delete(game_t* g){
 	renderer_delete(&g->renderer);
+	model_delete(g->player_model);
 }
 
 //displays game content on screen
@@ -55,7 +54,7 @@ void game_render(game_t* g){
 	renderer_start(&g->renderer);
 	//apply camera transform
 	renderer_set_camera(&g->renderer, &g->camera);
-	renderer_display(&g->renderer,&g->air);
+	aircraft_display(&g->player, &g->renderer);
 	renderer_display(&g->renderer,&g->terrain);
 	renderer_finish(&g->renderer);
 }
@@ -109,9 +108,10 @@ void game_react(game_t* g, SDL_Event *ev){
 //refreshes game content, physics is done here
 //last parameter is time from start of app
 void game_refresh(game_t* g, int t){
+	float dt = ((float)t)/100.0;
 	body_rotate(&g->camera, B_OUT, g->angle_step_y);
 	body_rotate(&g->camera, B_FORWARD, g->angle_step_x);
 	body_move_forward(&g->camera, g->fspeed);
 
-	body_do_kinematics(&g->air, ((float)t)/100.0);
+	aircraft_refresh(&g->player, dt);
 }

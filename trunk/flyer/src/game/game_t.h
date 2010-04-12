@@ -15,6 +15,7 @@
 #include <math.h>
 #include <default_game_renderer_settings.h>
 #include <body_t.h>
+#include <aircraft_t.h>
 
 #define ANGLE_STEP 0.005
 #define FSPEED -0.1
@@ -28,7 +29,9 @@ typedef struct{
 	float angle_step_y ;
 	float fspeed ;
 
-	body_t air;
+	aircraft_t player;
+	model_t* player_model;
+
 	body_t terrain;
 	body_t camera;
 	light_t light;	//something to illuminate the scene
