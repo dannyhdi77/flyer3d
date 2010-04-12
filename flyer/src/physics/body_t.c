@@ -13,6 +13,17 @@ void body_init(body_t* b, void* data, char type){
 	vector3_set(b->position, 0.0, 0.0, 0.0);
 	vector3_set(b->forward, 0.0, 0.0, 1.0);
 	vector3_set(b->up, 0.0, 1.0, 0.0);
+
+	vector3_set(b->velocity, 0.0, 0.0, -1.0);
+	vector3_set(b->acceleration, 0.0, 0.0, 0.0);
+
+	b->up_v = 0.0;
+	b->forward_v = 0.0;
+	b->out_v = 0.0;
+
+	b->up_a = 0;
+	b->forward_a = 0;
+	b->out_a = 0;
 }
 
 //apply object transform, second argument is renderer structure
@@ -99,4 +110,29 @@ void body_move_forward(body_t* b, float x){
 	vector3_set_v(dx, b->forward);
 	vector3_scale(dx, x);
 	vector3_add(b->position, dx);
+}
+
+//calculates both linear and angular displacements in time dt
+void body_do_kinematics(body_t* b, float dt){
+	//move object
+	vector3_t displacement;
+	vector3_set_v(displacement, b->velocity);
+	vector3_scale(displacement, dt);
+	vector3_add(b->position, displacement);
+
+	//change its speed
+	vector3_t dv;
+	vector3_set_v(dv, b->acceleration);
+	vector3_scale(dv, dt);
+	vector3_add(b->velocity,dv);
+
+	//do all rotations
+	body_rotate(b,B_UP,b->up_v*dt);
+	body_rotate(b,B_FORWARD,b->forward_v*dt);
+	body_rotate(b,B_OUT,b->out_v*dt);
+
+	//modify rotation speeds
+	b->up_v += dt*b->up_a;
+	b->forward_v += dt*b->forward_a;
+	b->out_v += dt*b->out_a;
 }

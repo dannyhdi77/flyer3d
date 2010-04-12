@@ -112,4 +112,6 @@ void game_refresh(game_t* g, int t){
 	body_rotate(&g->camera, B_OUT, g->angle_step_y);
 	body_rotate(&g->camera, B_FORWARD, g->angle_step_x);
 	body_move_forward(&g->camera, g->fspeed);
+
+	body_do_kinematics(&g->air, ((float)t)/100.0);
 }
