@@ -19,6 +19,17 @@ typedef struct {
 	vector3_t up;	//vector pointing up from the object
 	vector3_t forward;	//vector pointing forward, both for orientation
 
+	vector3_t velocity;		//object linear velocity vector
+	vector3_t acceleration;	//object linear acceleration vector
+
+	float up_v;		//rotation speed around up vector
+	float forward_v;	//rotation sped around forward vector
+	float out_v;	//rotation speed around out vector
+
+	float up_a;		//rotation speed around up vector
+	float forward_a;	//rotation sped around forward vector
+	float out_a;	//rotation speed around out vector
+
 } body_t;
 
 //boring initalization
@@ -41,5 +52,8 @@ void body_rotate(body_t* b, char axis, float angle);
 
 //moves body forward
 void body_move_forward(body_t*, float);
+
+//calculates both linear and angular displacements in time dt
+void body_do_kinematics(body_t*, float dt);
 
 #endif /* BODY_T_H_ */

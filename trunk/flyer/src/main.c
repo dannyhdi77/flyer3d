@@ -28,6 +28,7 @@ int main(){
 
 	//main loop
 	SDL_Event ev;
+	int last_refresh_time = SDL_GetTicks();
 	while(1){
 		while(SDL_PollEvent(&ev)){
 			if(ev.type == SDL_QUIT){
@@ -38,7 +39,9 @@ int main(){
 			}
 		}
 
-		game_refresh(&game, SDL_GetTicks());
+		game_refresh(&game, SDL_GetTicks() - last_refresh_time);
+		last_refresh_time = SDL_GetTicks();
+
 		game_render(&game);
 	}
 

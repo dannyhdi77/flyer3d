@@ -42,3 +42,8 @@ void game_system_quit(game_system_t* sys){
 	SDL_Quit();
 	exit(0);
 }
+
+//writes message to a log
+void game_system_log(const char* message){
+	printf("%s\n", message);
+}

@@ -29,4 +29,7 @@ int game_system_init(game_system_t*);
 //exits game
 void game_system_quit(game_system_t*);
 
+//writes message to a log
+void game_system_log(const char*);
+
 #endif /* GAME_SYSTEM_T_H_ */
