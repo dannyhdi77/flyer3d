@@ -25,7 +25,7 @@ void aircraft_load_test_settings(aircraft_t* a){
 	vector3_set(a->object.velocity,0.0,0.0, -1.0);
 
 	//linear
-	vector3_set(a->gravity,0.0, -0.01, 0.0);
+	vector3_set(a->gravity,0.0, -1.0, 0.0);
 	a->drag_coeff = 100.0;
 	a->lift_coeff = 1.0;
 	a->mass = 20.0;
@@ -48,24 +48,24 @@ void aircraft_refresh(aircraft_t* a, float dt){
 	//calculate resulting force
 	vector3_t f_result, f_term;
 	vector3_set(f_result, 0.0, 0.0, 0.0);
-/*
+
 	//calculate gravity
 	vector3_set_v(f_term, a->gravity);
 	vector3_scale(f_term, a->mass);
 	vector3_add(f_result, f_term);
-*/
+
 	//calculate thrust vector
 	vector3_set_v(f_term, a->object.forward);
 	vector3_scale(f_term, a->thrust);
 	vector3_add(f_result, f_term);
 
 	float speed = vector3_length(a->object.velocity);
-//	speed *= speed;
-/*	//calculate lift force
+	speed *= speed;
+	//calculate lift force
 	vector3_set_v(f_term, a->object.up);
 	vector3_scale(f_term, a->lift_coeff*speed);
 	vector3_add(f_result, f_term);
-*/
+
 
 	//calculate drag force
 	vector3_set_v(f_term, a->object.velocity);
