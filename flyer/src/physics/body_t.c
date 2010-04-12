@@ -14,16 +14,16 @@ void body_init(body_t* b, void* data, char type){
 	vector3_set(b->forward, 0.0, 0.0, 1.0);
 	vector3_set(b->up, 0.0, 1.0, 0.0);
 
-	vector3_set(b->velocity, 0.0, 0.0, -1.0);
+	vector3_set(b->velocity, 0.0, 0.0, 0.0);
 	vector3_set(b->acceleration, 0.0, 0.0, 0.0);
 
 	b->up_v = 0.0;
 	b->forward_v = 0.0;
 	b->out_v = 0.0;
 
-	b->up_a = 0;
-	b->forward_a = 0;
-	b->out_a = 0;
+	b->up_a = 0.0;
+	b->forward_a = 0.0;
+	b->out_a = 0.0;
 }
 
 //apply object transform, second argument is renderer structure
