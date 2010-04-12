@@ -20,9 +20,17 @@ void d_object_display(displayable_object_t* obj){
 		int i;
 		glColor3f(0.0, 1.0, 0.0);
 		glBegin(GL_LINES);
-		for(i=0 ; i<100; i++){
+		for(i=0 ; i<1000; i++){
 			glVertex3f(-1000.0, -5.0, -i*2.0);
 			glVertex3f(1000.0, -5.0, -i*2.0);
+		}
+		glEnd();
+
+		glColor3f(0.0, 1.0, 0.0);
+		glBegin(GL_LINES);
+		for(i=0 ; i<1000; i++){
+			glVertex3f(i*2.0 - 1000, -5.0, 0.0);
+			glVertex3f(i*2.0 - 1000, -5.0, -1000.0);
 		}
 		glEnd();
 	}

@@ -69,34 +69,37 @@ void game_react(game_t* g, SDL_Event *ev){
 		if(ev->jaxis.axis == 3){
 			if(ev->jaxis.value != 0 ){
 				if(ev->jaxis.value < 0)
-					g->angle_step_x = -ANGLE_STEP;
+					g->player.tail = -ANGLE_STEP;
 				else
-					g->angle_step_x = ANGLE_STEP;
+					g->player.tail = ANGLE_STEP;
 			}
 			else{
-				g->angle_step_x = 0.0;
+				g->player.tail = 0.0;
 			}
 		}
 		else if(ev->jaxis.axis == 4){
 			if(ev->jaxis.value != 0 ){
 				if(ev->jaxis.value < 0)
-					g->angle_step_y = ANGLE_STEP;
+					g->player.elevator = ANGLE_STEP;
 				else
-					g->angle_step_y = -ANGLE_STEP;
+					g->player.elevator = -ANGLE_STEP;
 			}
 			else{
-				g->angle_step_y = 0.0;
+				g->player.elevator = 0.0;
 			}
 		}
 	}
 	else if(ev->type == SDL_JOYBUTTONDOWN){
 		if(ev->jbutton.button == 4){
-			g->fspeed = FSPEED;
+			g->player.ailerons = -ANGLE_STEP;
+		}
+		else if(ev->jbutton.button == 6){
+			g->player.ailerons = ANGLE_STEP;
 		}
 	}
 	else if(ev->type == SDL_JOYBUTTONUP){
-		if(ev->jbutton.button == 4){
-			g->fspeed = 0;
+		if(ev->jbutton.button == 4 || ev->jbutton.button == 6){
+			g->player.ailerons = 0.0;
 		}
 	}
 	else if(ev->type == SDL_KEYDOWN){
@@ -109,9 +112,13 @@ void game_react(game_t* g, SDL_Event *ev){
 //last parameter is time from start of app
 void game_refresh(game_t* g, int t){
 	float dt = ((float)t)/100.0;
-	body_rotate(&g->camera, B_OUT, g->angle_step_y);
-	body_rotate(&g->camera, B_FORWARD, g->angle_step_x);
-	body_move_forward(&g->camera, g->fspeed);
-
 	aircraft_refresh(&g->player, dt);
+	vector3_set_v(g->camera.up,g->player.object.up);
+	vector3_set_v(g->camera.forward,g->player.object.forward);
+	vector3_t rel ;
+	vector3_set_v(rel,g->player.object.forward);
+	vector3_scale(rel,10.0);
+	vector3_add(rel,g->player.object.up);
+	vector3_set_v(g->camera.position,g->player.object.position);
+	vector3_add(g->camera.position, rel);
 }
