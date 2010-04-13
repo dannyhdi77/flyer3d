@@ -16,6 +16,7 @@
 #include <default_game_renderer_settings.h>
 #include <body_t.h>
 #include <aircraft_t.h>
+#include <terrain_t.h>
 
 #define ANGLE_STEP 0.005
 #define FSPEED -0.1
@@ -32,7 +33,8 @@ typedef struct{
 	aircraft_t player;
 	model_t* player_model;
 
-	body_t terrain;
+	terrain_t terrain;
+
 	body_t camera;
 	light_t light;	//something to illuminate the scene
 } game_t;

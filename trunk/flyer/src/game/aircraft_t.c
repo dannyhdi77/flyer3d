@@ -32,9 +32,9 @@ void aircraft_load_test_settings(aircraft_t* a){
 	a->thrust = -200.0;
 
 	//angular
-	a->up_coeff = 5.0;
-	a->forward_coeff = 10.0;
-	a->out_coeff = 10.0;
+	a->up_coeff = 3.0;
+	a->forward_coeff = 5.0;
+	a->out_coeff = 3.0;
 }
 
 //displays aircraft
@@ -66,7 +66,6 @@ void aircraft_refresh(aircraft_t* a, float dt){
 	vector3_scale(f_term, a->lift_coeff*speed);
 	vector3_add(f_result, f_term);
 
-
 	//calculate drag force
 	vector3_set_v(f_term, a->object.velocity);
 	vector3_normalize(f_term);
@@ -78,12 +77,12 @@ void aircraft_refresh(aircraft_t* a, float dt){
 
 	//apply it to a body
 	vector3_set_v(a->object.acceleration, f_result);
-	//speed = 1.0;
+
 	//angular
 	a->object.up_v = a->tail*speed*a->up_coeff;
 	a->object.forward_v = a->ailerons*speed*a->forward_coeff;
 	a->object.out_v = a->elevator*speed*a->out_coeff;
 
 	body_do_kinematics(&a->object, dt);
-	printf("%f\n",vector3_length(a->object.velocity));
+	//printf("%f\n",vector3_length(a->object.velocity));
 }

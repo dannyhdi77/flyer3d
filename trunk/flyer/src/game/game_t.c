@@ -22,9 +22,8 @@ int game_init(game_t *g){
 	aircraft_init(&g->player, g->player_model);
 	aircraft_load_test_settings(&g->player);
 
-
-
-	body_init(&g->terrain, NULL, DISP_TERRAIN);
+	terrain_init(&g->terrain,"data/terrain_test_map.bmp");
+	terrain_display_text(&g->terrain);
 
 	body_init(&g->camera,NULL, DISP_NONE);
 	vector3_t posit = {-1.0, 1.0, 1.0};
@@ -47,6 +46,7 @@ int game_init(game_t *g){
 void game_delete(game_t* g){
 	renderer_delete(&g->renderer);
 	model_delete(g->player_model);
+	terrain_delete(&g->terrain);
 }
 
 //displays game content on screen
@@ -55,7 +55,7 @@ void game_render(game_t* g){
 	//apply camera transform
 	renderer_set_camera(&g->renderer, &g->camera);
 	aircraft_display(&g->player, &g->renderer);
-	renderer_display(&g->renderer,&g->terrain);
+	renderer_display(&g->renderer,&g->terrain.object);
 	renderer_finish(&g->renderer);
 }
 
