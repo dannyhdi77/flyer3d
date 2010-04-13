@@ -55,4 +55,5 @@ void aircraft_display(aircraft_t*, renderer_t*);
 //refreshes aircrafts state
 void aircraft_refresh(aircraft_t*, float);
 
+
 #endif /* AIRCRAFT_T_H_ */

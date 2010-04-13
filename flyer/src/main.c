@@ -29,6 +29,8 @@ int main(){
 	//main loop
 	SDL_Event ev;
 	int last_refresh_time = SDL_GetTicks();
+	int last_fps = SDL_GetTicks();
+	int nframes = 0;
 	while(1){
 		while(SDL_PollEvent(&ev)){
 			if(ev.type == SDL_QUIT){
@@ -43,6 +45,13 @@ int main(){
 		last_refresh_time = SDL_GetTicks();
 
 		game_render(&game);
+		//calculate fps
+		nframes++;
+		if(SDL_GetTicks() - last_fps >= 1000){
+			printf("fps: %f\n", ((float)nframes));
+			nframes = 0;
+			last_fps = SDL_GetTicks();
+		}
 	}
 
 	//finish section
