@@ -15,6 +15,8 @@
 #define CAMERA_DYNAMIC 3	//camera behaves like helicopter
 #define CAMERA_FIXED_ANGLES 4 //camera keeps angles, bt is able to move
 
+#define MAX_DELAY 100
+
 typedef struct{
 	body_t obj;
 
@@ -26,6 +28,9 @@ typedef struct{
 
 	//camera mode
 	int mode;
+
+	//queries storing orientations in dynamic mode
+
 
 } camera_t;
 
