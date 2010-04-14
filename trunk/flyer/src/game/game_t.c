@@ -20,7 +20,7 @@ int game_init(game_t *g){
 
 	body_init(&g->teren, NULL, DISP_TERRAIN);
 
-	camera_init(&g->camera, &g->player.object, CAMERA_GLUED);
+	camera_init(&g->camera, &g->player.object, CAMERA_DYNAMIC);
 
 	//turn on the light
 	vector3_t pos = {0.0, 10.0, 0.0};

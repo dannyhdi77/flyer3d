@@ -41,6 +41,9 @@ void vector3_scale(vector3_t, float);
 //adds vector to a vector
 void vector3_add(vector3_t, vector3_t);
 
+//subtracts vector from a vector a -= b
+void vector3_subtract(vector3_t a, vector3_t b);
+
 //for debugging, prints vector on the screen
 void vector3_print(vector3_t);
 

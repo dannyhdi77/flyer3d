@@ -98,3 +98,10 @@ void vector3_rotate(vector3_t result, vector3_t axis, float angle){
 void vector3_print(vector3_t v){
 	printf("%f %f %f\n", v[0], v[1], v[2]);
 }
+
+//subtracts vector from a vector a -= b
+void vector3_subtract(vector3_t v, vector3_t b){
+	v[0] -= b[0];
+	v[1] -= b[1];
+	v[2] -= b[2];
+}

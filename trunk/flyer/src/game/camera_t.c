@@ -49,4 +49,12 @@ void camera_refresh(camera_t* c, float dt){
 		vector3_scale(term,c->relatve_pos[0]);
 		vector3_add(c->obj.position, term);
 	}
+	else if(c->mode == CAMERA_DYNAMIC){
+		//copy angular vals
+		vector3_set_v(c->obj.forward, c->subject->forward);
+		vector3_set_v(c->obj.up, c->subject->up);
+
+
+
+	}
 }
