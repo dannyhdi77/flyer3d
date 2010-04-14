@@ -23,6 +23,7 @@ void aircraft_delete(aircraft_t* a){
 //loads test settings
 void aircraft_load_test_settings(aircraft_t* a){
 	vector3_set(a->object.velocity,0.0,0.0, -1.0);
+	vector3_set(a->object.position, 0.0, 5.0,0.0);
 
 	//linear
 	vector3_set(a->gravity,0.0, -1.0, 0.0);
