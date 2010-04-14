@@ -13,7 +13,6 @@
 #include <SDL/SDL.h>
 
 #include <stdio.h>
-#include <displayable_object_t.h>
 #include <body_t.h>
 #include <inttypes.h>
 

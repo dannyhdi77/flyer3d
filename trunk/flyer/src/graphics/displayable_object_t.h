@@ -15,6 +15,7 @@
 #include <vector3_t.h>
 #include <model_t.h>
 #include <matrix44_t.h>
+//#include <terrain_t.h>
 
 //displayable object types definition
 #define DISP_MODEL 1

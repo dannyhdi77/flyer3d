@@ -27,7 +27,7 @@ void terrain_init(terrain_t* t, const char *path){
 
 	//read height map
 	int x, y;
-	float maxheight = 100.0;
+	float maxheight = 10.0;
 	uint8_t* itr = (uint8_t*)map->pixels;
 	for(y = 0; y<map->h ; y++){
 		for(x = 0; x<map->pitch ; x++){
@@ -46,7 +46,23 @@ void terrain_init(terrain_t* t, const char *path){
 void terrain_get_height(terrain_t*, float, float);
 
 //renders terrain on screen
-void terrain_display(terrain_t*);
+void terrain_display(terrain_t* t){
+	glColor3f(0.0, 1.0, 0.0);
+	glBegin(GL_POINTS);
+	int x, y;
+	for(y = 0; y < t->y ; y++){
+			for(x = 0; x< 100 ; x++){
+				glVertex3f(x,t->height_map[y*t->x +x ],-y);
+			}
+		}
+/*
+	for(x = 0 ; x < 1000; x+=1){
+		glVertex3f(0.0, -5.0, -x);
+	}
+*/
+	glEnd();
+
+}
 
 //displays terrain in text mode
 void terrain_display_text(terrain_t* t){

@@ -13,22 +13,16 @@ int game_init(game_t *g){
 	default_game_renderer_settings(&g->renderer);
 	renderer_reload(&g->renderer);
 
-	//haha
-	g->angle_step_x = 0.0;
-	g->angle_step_y = 0.0;
-	g->fspeed = 0.0;
 
 	g->player_model = model_load("data/StarCruiser.obj");
 	aircraft_init(&g->player, g->player_model);
 	aircraft_load_test_settings(&g->player);
 
-	terrain_init(&g->terrain,"data/terrain_test_map.bmp");
-	terrain_display_text(&g->terrain);
+	terrain_init(&g->terrain,"data/terrain_map.bmp");
+	//terrain_display_text(&g->terrain);
 
 	body_init(&g->camera,NULL, DISP_NONE);
-	vector3_t posit = {-1.0, 1.0, 1.0};
-	body_set_position(&g->camera,posit);
-
+	vector3_set(g->camera.position,0.0, 10.0, 50.0);
 
 	//turn on the light
 	vector3_t pos = {0.0, 10.0, 0.0};
@@ -55,7 +49,7 @@ void game_render(game_t* g){
 	//apply camera transform
 	renderer_set_camera(&g->renderer, &g->camera);
 	aircraft_display(&g->player, &g->renderer);
-	renderer_display(&g->renderer,&g->terrain.object);
+//	renderer_display(&g->renderer,&g->terrain.object);
 	renderer_finish(&g->renderer);
 }
 
@@ -113,12 +107,12 @@ void game_react(game_t* g, SDL_Event *ev){
 void game_refresh(game_t* g, int t){
 	float dt = ((float)t)/100.0;
 	aircraft_refresh(&g->player, dt);
-	vector3_set_v(g->camera.up,g->player.object.up);
+/*	vector3_set_v(g->camera.up,g->player.object.up);
 	vector3_set_v(g->camera.forward,g->player.object.forward);
 	vector3_t rel ;
 	vector3_set_v(rel,g->player.object.forward);
 	vector3_scale(rel,10.0);
 	vector3_add(rel,g->player.object.up);
 	vector3_set_v(g->camera.position,g->player.object.position);
-	vector3_add(g->camera.position, rel);
+	vector3_add(g->camera.position, rel);*/
 }
