@@ -41,6 +41,9 @@ void vector3_scale(vector3_t, float);
 //adds vector to a vector
 void vector3_add(vector3_t, vector3_t);
 
+//for debugging, prints vector on the screen
+void vector3_print(vector3_t);
+
 //rotates vector around specified axis, and
 
 #endif /* VECTOR3_T_H_ */

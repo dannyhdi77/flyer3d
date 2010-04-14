@@ -36,21 +36,6 @@ void body_apply_transform(body_t* obj){
 	matrix44_t transform;
 	matrix44_compose(transform, x_axis, 0.0, obj->up, 0.0, obj->forward, 0.0, obj->position, 1.0);
 	glMultMatrixf(transform);
-/*
-	glColor3f(0.0,0.0,1.0);
-	glBegin(GL_LINES);
-		glVertex3f(0.0,0.0,0.0);
-		glVertex3f(obj->up[0], obj->up[1], obj->up[2]);
-
-		glColor3f(1.0,0.0,0.0);
-		glVertex3f(0.0,0.0,0.0);
-		glVertex3f(obj->forward[0], obj->forward[1], obj->forward[2]);
-
-		glColor3f(0.0,1.0,0.0);
-		glVertex3f(0.0,0.0,0.0);
-		glVertex3f(x_axis[0], x_axis[1], x_axis[2]);
-	glEnd();
-*/
 }
 
 //needed by inverted transform, simply invertes vectors
@@ -62,6 +47,7 @@ void body_frame_invert(body_t* b){
 
 //apply inverted object transform
 void body_apply_inverted_transform(body_t* obj){
+
 	//compute x axis vector
 	vector3_t x_axis;
 	vector3_cross_product(x_axis, obj->up, obj->forward);

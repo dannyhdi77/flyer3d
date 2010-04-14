@@ -95,8 +95,9 @@ void renderer_start(renderer_t* r){
 	//delete old list, create new
 	list_delete(&r->rendering_queue);
 	list_init(&r->rendering_queue,sizeof(body_t*),NULL);
-	//save matrix state
-	glPushMatrix();
+	//reset matrix state
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
 }
 
 void renderer_draw_object(void * vobj){
@@ -113,12 +114,11 @@ void renderer_finish(renderer_t* r){
 	glClearColor(0.1,0.1, 0.1, 0.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);
-
 	//apply camera transform
 	body_apply_inverted_transform(r->camera);
 
 	//draw everything from the queue
-	list_iterate(&r->rendering_queue, &renderer_draw_object, NULL);
+	list_iterate(&r->rendering_queue, renderer_draw_object, NULL);
 
 	glFlush();
 
@@ -136,9 +136,6 @@ void renderer_finish(renderer_t* r){
 
 	//display everything on screen
 	SDL_GL_SwapBuffers();
-
-	//restore matrix state
-	glPopMatrix();
 }
 
 //adds object to rendering queue

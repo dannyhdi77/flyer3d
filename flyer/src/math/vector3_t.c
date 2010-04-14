@@ -93,3 +93,8 @@ void vector3_rotate(vector3_t result, vector3_t axis, float angle){
 		for(k = 0; k<3 ; k++)
 			result[i] += rotation_matrix[k][i]*v[k];
 }
+
+//for debugging, prints vector on the screen
+void vector3_print(vector3_t v){
+	printf("%f %f %f\n", v[0], v[1], v[2]);
+}
