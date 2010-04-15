@@ -38,38 +38,23 @@ void camera_refresh(camera_t* c, float dt){
 		vector3_add(c->obj.position, c->relatve_pos);
 		vector3_print(c->obj.position);
 	}
-	else if(c->mode == CAMERA_GLUED){
-		//copy angular vals
-		vector3_set_v(c->obj.forward, c->subject->forward);
-		vector3_set_v(c->obj.up, c->subject->up);
-
-		//linear translation
-		vector3_t term;
-		vector3_set_v(c->obj.position, c->subject->position);
-
-		vector3_set_v(term,c->subject->forward);
-		vector3_scale(term,c->relatve_pos[2]);
-		vector3_add(c->obj.position, term);
-
-		vector3_set_v(term,c->subject->up);
-		vector3_scale(term,c->relatve_pos[1]);
-		vector3_add(c->obj.position, term);
-
-		vector3_cross_product(term,c->subject->up, c->subject->forward);
-		vector3_scale(term,c->relatve_pos[0]);
-		vector3_add(c->obj.position, term);
-	}
-	else if(c->mode == CAMERA_DYNAMIC){
-		//adds orientation to its query
-		fifo_insert(&c->forward_queue, c->subject->forward);
-		fifo_insert(&c->up_queue, c->subject->up);
-
-		//if we have enough entries, use the oldest
-		if(fifo_size(&c->forward_queue) == CAMERA_DELAY){
-			fifo_get(&c->forward_queue, c->obj.forward);
-			fifo_get(&c->up_queue, c->obj.up);
+	else{
+		if(c->mode == CAMERA_GLUED){
+			//copy angular vals
+			vector3_set_v(c->obj.forward, c->subject->forward);
+			vector3_set_v(c->obj.up, c->subject->up);
 		}
+		else if(c->mode == CAMERA_DYNAMIC){
+			//adds orientation to its query
+			fifo_insert(&c->forward_queue, c->subject->forward);
+			fifo_insert(&c->up_queue, c->subject->up);
 
+			//if we have enough entries, use the oldest
+			if(fifo_size(&c->forward_queue) == CAMERA_DELAY){
+				fifo_get(&c->forward_queue, c->obj.forward);
+				fifo_get(&c->up_queue, c->obj.up);
+			}
+		}
 		//linear translation
 		vector3_t term;
 		vector3_set_v(c->obj.position, c->subject->position);
