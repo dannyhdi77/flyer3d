@@ -9,13 +9,14 @@
 #define CAMERA_T_H_
 
 #include <body_t.h>
+#include <fifo_t.h>
 
 #define CAMERA_FIXED 1	//camera stays at its inital position
 #define CAMERA_GLUED 2		//camera is at fixed positon to followed object
 #define CAMERA_DYNAMIC 3	//camera behaves like helicopter
 #define CAMERA_FIXED_ANGLES 4 //camera keeps angles, bt is able to move
 
-#define MAX_DELAY 100
+#define CAMERA_DELAY 60
 
 typedef struct{
 	body_t obj;
@@ -30,12 +31,16 @@ typedef struct{
 	int mode;
 
 	//queries storing orientations in dynamic mode
-
+	fifo_t up_queue;
+	fifo_t forward_queue;
 
 } camera_t;
 
 //initalizes camera with body to follow and mode
 void camera_init(camera_t*, body_t *, int);
+
+//cleans up
+void camera_delete(camera_t*);
 
 //set relative position
 void camera_set_relative(camera_t*, vector3_t);

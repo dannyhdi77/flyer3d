@@ -6,17 +6,8 @@
 
 #include <game_system_t.h>
 #include <game_t.h>
-#include <vector3_t.h>
 
 int main(){
-	//vector test, for future removal
-	vector3_t v;
-	v[0] = 5;
-	v[1] = 0;
-	v[2] = 0;
-	printf("len %f\n", vector3_length(v));
-	vector3_normalize(v);
-	printf("len %f\n", vector3_length(v));
 
 	//general game system initalization
 //	game_system_t system;
