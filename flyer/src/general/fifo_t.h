@@ -25,7 +25,7 @@ typedef struct {
 	int max_size;
 
 	//indexes of first and last elements
-	void* first, last;
+	void* first, *last;
 
 } fifo_t;
 

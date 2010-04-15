@@ -33,12 +33,30 @@ int fifo_insert(fifo_t* f, void* e){
 	memcpy(f->first, e,f->elem_size);
 	//increment the pointer
 	f->first = (char*)f->first + f->elem_size;
+	//fix it, if it gets too far
+	if(f->first - f->data >= f->elem_size*f->max_size)
+		f->first = f->data;
 
 	return 1;
 }
 
 //get something
-int fifo_get(fifo_t*, void*);
+int fifo_get(fifo_t* f, void* e){
+	if(f->size == 0)
+		return 0;
+
+	f->size--;
+	//copy the data
+	if(e != NULL)
+		memcpy(e, f->last,f->elem_size);
+	//increment the pointer
+	f->last = (char*)f->last + f->elem_size;
+	//fix it, if it gets too far
+	if(f->last - f->data >= f->elem_size*f->max_size)
+		f->last = f->data;
+
+	return 1;
+}
 
 //returns fifo size
 int fifo_size(fifo_t* f){
