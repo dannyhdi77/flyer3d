@@ -17,6 +17,7 @@ OBJS = $(OBJDIR)/main.o	\
 	$(OBJDIR)/graphics/model_t.o	\
 	$(OBJDIR)/graphics/renderer_t.o \
 	$(OBJDIR)/general/game_system_t.o \
+	$(OBJDIR)/general/utilties.o \
 	$(OBJDIR)/game/game_t.o \
 	$(OBJDIR)/game/control_handler_t.o \
 	$(OBJDIR)/game/aircraft_t.o \
@@ -25,7 +26,6 @@ OBJS = $(OBJDIR)/main.o	\
 	$(OBJDIR)/game/pipe_t.o \
 	$(OBJDIR)/math/vector3_t.o \
 	$(OBJDIR)/math/matrix44_t.o \
-	$(OBJDIR)/graphics/displayable_object_t.o \
 	$(OBJDIR)/graphics/light_t.o \
 	$(OBJDIR)/graphics/default_game_renderer_settings.o\
 	$(OBJDIR)/physics/body_t.o \

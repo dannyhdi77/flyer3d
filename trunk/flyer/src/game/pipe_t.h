@@ -22,7 +22,7 @@
 #define PIPE_MIN_OUT_ROTATION -0.5
 #define PIPE_MAX_OUT_ROTATION 0.5
 
-#define PIPE_GAP 10.0
+#define PIPE_GAP SEGMENT_GAP
 
 
 typedef struct {

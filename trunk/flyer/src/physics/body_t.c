@@ -36,6 +36,7 @@ void body_apply_transform(body_t* obj){
 	glMultMatrixf(transform);
 }
 
+
 //needed by inverted transform, simply invertes vectors
 void body_frame_invert(body_t* b){
 	vector3_invert(b->position);

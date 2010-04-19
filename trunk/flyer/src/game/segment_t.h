@@ -17,8 +17,11 @@
 //settings for all segments
 #define SEGMENT_N_POINTS 100.0
 #define SEGMENT_RADIUS 10
+#define SEGMENT_GAP 10.0
 
 //segment types
+#define SEGMENT_NORMAL 1
+#define SEGMENT_CONNECTOR 2
 
 typedef struct {
 	//segment type, true or connector
@@ -28,18 +31,23 @@ typedef struct {
 	body_t obj;
 
 
-	//segments color
+	//segment color
 	vector3_t color;
+	vector3_t next_color;	//used for connectors
 
 	//length
 	float length;
 
-	//previous and next
+	//rotation relative to previous segment used for connectors
+	float up_rotation, out_rotation;
 
 } segment_t;
 
 //sets some basic properties
 void segment_init(segment_t*, float length);
+
+//initalizes segment as connector beetween two normal segments
+void segment_init_connector(segment_t*, segment_t* prev, segment_t* next, float upr, float outr);
 
 //deletes segment
 void segment_delete(segment_t*);
