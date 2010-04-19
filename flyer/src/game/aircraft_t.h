@@ -11,12 +11,14 @@
 #include <body_t.h>
 #include <renderer_t.h>
 #include <vector3_t.h>
+#include <model_t.h>
 
 #define A_ACTIVE 1
 #define A_INACTIVE 2
 
 typedef struct{
 	body_t object;
+	model_t* model;
 
 	float mass; //object mass
 	vector3_t gravity;	//vector of gravity acceleration
@@ -50,7 +52,7 @@ void aircraft_delete(aircraft_t*);
 void aircraft_load_test_settings(aircraft_t*);
 
 //displays aircraft
-void aircraft_display(aircraft_t*, renderer_t*);
+void aircraft_display(aircraft_t*);
 
 //refreshes aircrafts state
 void aircraft_refresh(aircraft_t*, float);

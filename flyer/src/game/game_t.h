@@ -11,7 +11,6 @@
 #include <renderer_t.h>
 #include <game_system_t.h>
 #include <model_t.h>
-#include <displayable_object_t.h>
 #include <math.h>
 #include <default_game_renderer_settings.h>
 #include <body_t.h>

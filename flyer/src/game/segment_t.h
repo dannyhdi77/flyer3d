@@ -10,6 +10,9 @@
 
 #include <body_t.h>
 #include <math.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include <SDL/SDL.h>
 
 //settings for all segments
 #define SEGMENT_N_POINTS 100.0

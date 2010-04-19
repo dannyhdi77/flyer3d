@@ -9,8 +9,9 @@
 
 //sets some basic properties
 void segment_init(segment_t* s, float length){
-	body_init(&s->obj, s, DISP_SEGMENT);
+	body_init(&s->obj);
 	s->length = length;
+	vector3_set(s->color, 1.0, 0.0, 0.0);	//default color
 }
 
 //deletes segment
@@ -20,6 +21,8 @@ void segment_delete(segment_t* s){
 
 //prints segment
 void segment_display(segment_t* s){
+	glPushMatrix();
+	body_apply_transform(&s->obj);
 	int i;
 	float angle_step = 2*3.1415/SEGMENT_N_POINTS;
 	float x,y, angle = 0;
@@ -36,6 +39,7 @@ void segment_display(segment_t* s){
 		angle += angle_step;
 	}
 	glEnd();
+	glPopMatrix();
 }
 
 //pysics and so

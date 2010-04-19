@@ -11,7 +11,7 @@
 void camera_init(camera_t* c , body_t *b, int mode){
 	c->mode = mode;
 	c->subject = b;
-	body_init(&c->obj, NULL, DISP_NONE);
+	body_init(&c->obj);
 	//default camera position
 	vector3_set(c->relatve_pos, 0.0, 2.0, 15.0);
 
