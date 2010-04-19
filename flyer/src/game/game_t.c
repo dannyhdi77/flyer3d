@@ -22,6 +22,9 @@ int game_init(game_t *g){
 
 	camera_init(&g->camera, &g->player.object, CAMERA_DYNAMIC);
 
+	segment_init(&g->seg,100.0);
+	vector3_set(g->seg.color, 1.0, 0.0,0.0);
+
 	//turn on the light
 	vector3_t pos = {0.0, 10.0, 0.0};
 	light_set_index(&g->light, 0);
@@ -47,6 +50,7 @@ void game_render(game_t* g){
 	renderer_set_camera(&g->renderer, &g->camera.obj);
 	aircraft_display(&g->player, &g->renderer);
 	renderer_display(&g->renderer, &g->teren);
+	renderer_display(&g->renderer, &g->seg.obj);
 	renderer_finish(&g->renderer);
 }
 
