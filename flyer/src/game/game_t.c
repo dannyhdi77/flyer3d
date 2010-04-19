@@ -22,8 +22,10 @@ int game_init(game_t *g){
 
 	camera_init(&g->camera, &g->player.object, CAMERA_DYNAMIC);
 
-	segment_init(&g->seg,100.0);
-	vector3_set(g->seg.color, 1.0, 0.0,0.0);
+	//segment_init(&g->seg,100.0);
+	//vector3_set(g->seg.color, 1.0, 0.0,0.0);
+	pipe_init(&g->pipe, 1, 5);
+
 
 	//turn on the light
 	vector3_t pos = {0.0, 10.0, 0.0};
@@ -47,9 +49,9 @@ void game_delete(game_t* g){
 void game_render(game_t* g){
 	renderer_start(&g->renderer);
 	renderer_set_camera(&g->renderer, &g->camera.obj);
-//	renderer_draw_object(&g->teren);
 	aircraft_display(&g->player);
-	segment_display(&g->seg);
+	pipe_display(&g->pipe);
+	//segment_display(&g->seg);
 	renderer_finish(&g->renderer);
 }
 

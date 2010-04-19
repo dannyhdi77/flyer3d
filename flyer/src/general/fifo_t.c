@@ -16,6 +16,7 @@ void fifo_init(fifo_t* f, size_t elem_size, int maxsize){
 	f->data = malloc(elem_size*maxsize);
 	f->first = f->data;
 	f->last = f->data;
+	f->front = NULL;
 }
 
 //destruction
@@ -27,7 +28,7 @@ void fifo_delete(fifo_t* f){
 int fifo_insert(fifo_t* f, void* e){
 	if(f->size == f->max_size)
 		return 0;
-
+	f->front = f->first;
 	f->size++;
 	//copy the data
 	memcpy(f->first, e,f->elem_size);
@@ -65,10 +66,22 @@ int fifo_size(fifo_t* f){
 
 //returns pointer to front of fifo
 void* fifo_get_front_pointer(fifo_t* f){
-	return f->first;
+	return f->front;
 }
 
 //returns pointer to back of fifo
 void* fifo_get_back_pointer(fifo_t* f){
 	return f->last;
+}
+
+
+//iterate fifo content with specified function
+void fifo_iterate(fifo_t* q, fifo_fun f){
+	void *itr = q->last;
+	while(itr != q->first){
+		(*f)(itr);	//invoke desired function
+		itr = (char*)itr + q->elem_size;
+		if(itr - q->data >= q->elem_size*q->max_size)
+			itr = q->data;
+	}
 }

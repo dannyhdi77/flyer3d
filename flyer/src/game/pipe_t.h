@@ -14,6 +14,16 @@
 #include <utilties.h>
 
 #define PIPE_MAX_LENGTH 10
+#define PIPE_MAX_SEGMENT_LENGTH 100.0
+#define PIPE_MIN_SEGMENT_LENGTH 50.0
+
+#define PIPE_MIN_UP_ROTATION -0.5
+#define PIPE_MAX_UP_ROTATION 0.5
+#define PIPE_MIN_OUT_ROTATION -0.5
+#define PIPE_MAX_OUT_ROTATION 0.5
+
+#define PIPE_GAP 10.0
+
 
 typedef struct {
 	//pipe position and orientation

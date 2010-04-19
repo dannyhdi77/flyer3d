@@ -8,13 +8,13 @@
 #ifndef BODY_T_H_
 #define BODY_T_H_
 
-#include <displayable_object_t.h>
 #include <vector3_t.h>
 #include <matrix44_t.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include <SDL/SDL.h>
 
 typedef struct {
-	displayable_object_t model;	//3d model of body
-
 	vector3_t position;	 //position of object
 	vector3_t up;	//vector pointing up from the object
 	vector3_t forward;	//vector pointing forward, both for orientation
@@ -33,7 +33,7 @@ typedef struct {
 } body_t;
 
 //boring initalization
-void body_init(body_t*, void*, char);
+void body_init(body_t*);
 
 //sets body position
 void body_set_position(body_t*, vector3_t);

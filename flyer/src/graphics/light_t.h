@@ -11,7 +11,7 @@
 #include <GL/glu.h>
 #include <SDL/SDL.h>
 
-#include <displayable_object_t.h>
+#include <body_t.h>
 #include <vector3_t.h>
 
 typedef float color_t[4];
@@ -19,7 +19,7 @@ typedef float color_t[4];
 typedef struct {
 	int index;
 	color_t color;
-	displayable_object_t model;
+	body_t model;
 } light_t;
 
 //initalizes light
