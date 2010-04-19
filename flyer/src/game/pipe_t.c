@@ -45,6 +45,8 @@ void pipe_init(pipe_t* p, int forward, int backward){
 	pipe_add_segment(p);
 	pipe_add_segment(p);
 	pipe_add_segment(p);
+//	pipe_add_segment(p);
+//	pipe_add_segment(p);
 	//we assume that player is placed in the middle segment
 	//first, add back segments and middle segment
 

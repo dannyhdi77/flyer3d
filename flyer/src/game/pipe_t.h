@@ -13,7 +13,7 @@
 #include <segment_t.h>
 #include <utilties.h>
 
-#define PIPE_MAX_LENGTH 10
+#define PIPE_MAX_LENGTH 100
 #define PIPE_MAX_SEGMENT_LENGTH 100.0
 #define PIPE_MIN_SEGMENT_LENGTH 50.0
 

@@ -28,6 +28,9 @@ void light_init(light_t*);
 //enables the light
 void light_on(light_t*);
 
+//moves light
+void light_refresh(light_t* l, float dt, body_t* player);
+
 //setters
 void light_set_position(light_t*, vector3_t);
 void light_set_index(light_t*, int);
