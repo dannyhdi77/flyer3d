@@ -34,6 +34,10 @@ int game_system_init(game_system_t* sys){
 		printf("Number of Buttons: %d\n", SDL_JoystickNumButtons(joy));
 		printf("Number of Balls: %d\n", SDL_JoystickNumBalls(joy));
 	}
+
+	//init random number generator
+	srand(time(0));
+
 	return 0;
 }
 

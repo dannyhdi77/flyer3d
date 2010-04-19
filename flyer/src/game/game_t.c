@@ -6,9 +6,9 @@
  */
 #include "game_t.h"
 
-//initalizes game
+//Initializes game
 int game_init(game_t *g){
-	//initalize game renderer
+	//initialize game renderer
 	renderer_init(&g->renderer);
 	default_game_renderer_settings(&g->renderer);
 	renderer_reload(&g->renderer);
