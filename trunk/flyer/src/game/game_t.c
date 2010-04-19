@@ -110,4 +110,5 @@ void game_refresh(game_t* g, int t){
 	float dt = ((float)t)/100.0;
 	aircraft_refresh(&g->player, dt);
 	camera_refresh(&g->camera, dt);
+	light_refresh(&g->light, dt, &g->player);
 }
