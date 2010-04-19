@@ -44,5 +44,10 @@ int fifo_get(fifo_t*, void*);
 //returns fifo size
 int fifo_size(fifo_t*);
 
+//returns pointer to front of fifo
+void* fifo_get_front_pointer(fifo_t*);
+
+//returns pointer to back of fifo
+void* fifo_get_back_pointer(fifo_t*);
 
 #endif /* FIFO_T_H_ */
