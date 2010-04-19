@@ -7,9 +7,7 @@
 #include <body_t.h>
 
 //boring initalization
-void body_init(body_t* b, void* data, char type){
-	b->model.data = data;
-	b->model.type = type;
+void body_init(body_t* b){
 	vector3_set(b->position, 0.0, 0.0, 0.0);
 	vector3_set(b->forward, 0.0, 0.0, 1.0);
 	vector3_set(b->up, 0.0, 1.0, 0.0);

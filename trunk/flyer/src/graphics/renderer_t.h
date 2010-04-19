@@ -17,7 +17,6 @@
 
 #include <list_t.h>
 #include <body_t.h>
-#include <displayable_object_t.h>
 #include <light_t.h>
 #include <string.h>
 

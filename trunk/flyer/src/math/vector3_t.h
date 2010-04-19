@@ -9,6 +9,7 @@
 #define VECTOR3_T_H_
 
 #include <math.h>
+#include <stdio.h>
 
 //not a structure, only a typedef
 typedef float vector3_t[3];

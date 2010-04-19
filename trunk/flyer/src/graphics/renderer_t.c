@@ -64,7 +64,7 @@ void renderer_reload(renderer_t* r){
 	//set proper winding
 	glFrontFace(r->winding);
 
-	//set shade model
+	//set shade mode#include <displayable_object_t.h>l
 	glShadeModel(r->shade_model);
 }
 
@@ -98,12 +98,6 @@ void renderer_start(renderer_t* r){
 	body_apply_inverted_transform(r->camera);
 }
 
-void renderer_draw_object(body_t *obj){
-	glPushMatrix();	//save matrix state
-		body_apply_transform(obj);
-		d_object_display(&obj->model);
-	glPopMatrix();
-}
 
 //finishes rendering
 void renderer_finish(renderer_t* r){

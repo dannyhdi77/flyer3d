@@ -17,6 +17,7 @@
 #include <aircraft_t.h>
 #include <camera_t.h>
 #include <segment_t.h>
+#include <pipe_t.h>
 
 #define ANGLE_STEP 0.005
 #define FSPEED -0.1
@@ -26,14 +27,12 @@ typedef struct{
 	game_system_t *system;	//for state changes, etc.
 //	control_handler_t control;	//key bindings
 
-	float angle_step_x ;
-	float angle_step_y ;
-	float fspeed ;
 
 	aircraft_t player;
 	model_t* player_model;
 
 	segment_t seg;
+	pipe_t pipe;
 
 	camera_t camera;
 	body_t teren;
