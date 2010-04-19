@@ -14,6 +14,7 @@
 #include <SDL/SDL.h>
 #include <vector3_t.h>
 #include <model_t.h>
+//#include <segment_t.h>
 #include <matrix44_t.h>
 //#include <terrain_t.h>
 
@@ -23,6 +24,7 @@
 #define DISP_LIGHT 3
 #define DISP_TERRAIN 4
 #define DISP_NONE 5
+#define DISP_SEGMENT 6
 
 typedef struct{
 	char type;	//type of object

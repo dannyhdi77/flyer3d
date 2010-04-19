@@ -17,6 +17,7 @@
 #include <body_t.h>
 #include <aircraft_t.h>
 #include <camera_t.h>
+#include <segment_t.h>
 
 #define ANGLE_STEP 0.005
 #define FSPEED -0.1
@@ -33,6 +34,7 @@ typedef struct{
 	aircraft_t player;
 	model_t* player_model;
 
+	segment_t seg;
 
 	camera_t camera;
 	body_t teren;
