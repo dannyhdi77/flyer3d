@@ -4,15 +4,11 @@
 int renderer_init(renderer_t* r){
 	r->screen = NULL;
 	r->screenshot_file_name = NULL;
-	list_init(&(r->rendering_queue), sizeof(body_t*), NULL);
 	return 0 ;
 }
 
 //deletes renderer
 void renderer_delete(renderer_t* r){
-	//we delete only dynamic data structure
-	list_delete(&r->rendering_queue);
-
 	//we delete screenshot filename
 	free(r->screenshot_file_name);
 }
@@ -92,16 +88,17 @@ void renderer_resize(renderer_t* r, int w, int h){
 
 //starts rendering mode
 void renderer_start(renderer_t* r){
-	//delete old list, create new
-	list_delete(&r->rendering_queue);
-	list_init(&r->rendering_queue,sizeof(body_t*),NULL);
+	//clear context
+	glClearColor(0.1,0.1, 0.1, 0.0);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	//reset matrix state
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+	//apply camera transform
+	body_apply_inverted_transform(r->camera);
 }
 
-void renderer_draw_object(void * vobj){
-	body_t *obj = *(body_t**)vobj;
+void renderer_draw_object(body_t *obj){
 	glPushMatrix();	//save matrix state
 		body_apply_transform(obj);
 		d_object_display(&obj->model);
@@ -110,16 +107,6 @@ void renderer_draw_object(void * vobj){
 
 //finishes rendering
 void renderer_finish(renderer_t* r){
-	//actual rendering
-	glClearColor(0.1,0.1, 0.1, 0.0);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glMatrixMode(GL_MODELVIEW);
-	//apply camera transform
-	body_apply_inverted_transform(r->camera);
-
-	//draw everything from the queue
-	list_iterate(&r->rendering_queue, renderer_draw_object, NULL);
-
 	glFlush();
 
 	//if screenshot was requested, make it
@@ -136,11 +123,6 @@ void renderer_finish(renderer_t* r){
 
 	//display everything on screen
 	SDL_GL_SwapBuffers();
-}
-
-//adds object to rendering queue
-void renderer_display(renderer_t* r, body_t* obj){
-	list_insert(&r->rendering_queue, &obj);
 }
 
 //sets renderer camera(point of view)
