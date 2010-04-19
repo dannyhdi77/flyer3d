@@ -15,14 +15,24 @@
 #define SEGMENT_N_POINTS 100.0
 #define SEGMENT_RADIUS 10
 
+//segment types
+
 typedef struct {
-	//segments position and orientation
+	//segment type, true or connector
+	int type;
+
+	//segment position and orientation
 	body_t obj;
 
-	float length;
 
 	//segments color
 	vector3_t color;
+
+	//length
+	float length;
+
+	//previous and next
+
 } segment_t;
 
 //sets some basic properties

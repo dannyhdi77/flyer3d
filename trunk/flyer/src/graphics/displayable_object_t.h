@@ -25,6 +25,7 @@
 #define DISP_TERRAIN 4
 #define DISP_NONE 5
 #define DISP_SEGMENT 6
+#define DISP_PIPE 7
 
 typedef struct{
 	char type;	//type of object
