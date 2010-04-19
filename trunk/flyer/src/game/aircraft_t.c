@@ -39,10 +39,6 @@ void aircraft_load_test_settings(aircraft_t* a){
 	a->out_coeff = 3.0;
 }
 
-//displays aircraft
-void aircraft_display(aircraft_t* a, renderer_t* r){
-	renderer_display(r,&a->object);
-}
 
 //refreshes aircrafts state
 void aircraft_refresh(aircraft_t* a, float dt){

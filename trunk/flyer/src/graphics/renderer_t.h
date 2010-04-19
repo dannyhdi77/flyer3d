@@ -66,8 +66,7 @@ typedef struct{
 	//light settings
 	color_t ambient_color;	//ambient light color
 
-	//list of objects to render
-	list_t rendering_queue;
+	//camera
 	body_t *camera;
 
 	//data for screenshot creation
@@ -94,8 +93,8 @@ void renderer_start(renderer_t*);
 //finishes rendering
 void renderer_finish(renderer_t*);
 
-//adds object to rendering queue
-void renderer_display(renderer_t*, body_t*);
+//displays object
+void renderer_draw_object(body_t *obj);
 
 //sets renderer camera(point of view)
 void renderer_set_camera(renderer_t*, body_t*);
