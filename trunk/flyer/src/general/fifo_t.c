@@ -62,3 +62,13 @@ int fifo_get(fifo_t* f, void* e){
 int fifo_size(fifo_t* f){
 	return f->size;
 }
+
+//returns pointer to front of fifo
+void* fifo_get_front_pointer(fifo_t* f){
+	return f->first;
+}
+
+//returns pointer to back of fifo
+void* fifo_get_back_pointer(fifo_t* f){
+	return f->last;
+}

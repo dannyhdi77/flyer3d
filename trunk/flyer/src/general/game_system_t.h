@@ -11,6 +11,8 @@
 #include <SDL/SDL.h>
 #include <stdio.h>
 #include <messages.h>
+#include <stdlib.h>
+#include <time.h>
 
 //state of game definitions
 #define STATE_GAME 0

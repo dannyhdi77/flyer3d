@@ -21,6 +21,8 @@ OBJS = $(OBJDIR)/main.o	\
 	$(OBJDIR)/game/control_handler_t.o \
 	$(OBJDIR)/game/aircraft_t.o \
 	$(OBJDIR)/game/camera_t.o \
+	$(OBJDIR)/game/segment_t.o \
+	$(OBJDIR)/game/pipe_t.o \
 	$(OBJDIR)/math/vector3_t.o \
 	$(OBJDIR)/math/matrix44_t.o \
 	$(OBJDIR)/graphics/displayable_object_t.o \
