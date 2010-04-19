@@ -10,6 +10,10 @@
 
 #include <fifo_t.h>
 #include <body_t.h>
+#include <segment_t.h>
+#include <utilties.h>
+
+#define PIPE_MAX_LENGTH 10
 
 typedef struct {
 	//pipe position and orientation

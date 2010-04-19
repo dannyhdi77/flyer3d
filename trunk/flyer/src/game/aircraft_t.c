@@ -8,7 +8,8 @@
 
 //initalizes aircraft structure with its model
 void aircraft_init(aircraft_t* a, model_t* m){
-	body_init(&a->object, m, DISP_MODEL);
+	body_init(&a->object);
+	a->model = m;
 
 	a->ailerons = 0.0;
 	a->elevator = 0.0;
@@ -19,6 +20,14 @@ void aircraft_init(aircraft_t* a, model_t* m){
 //deletes aircraft
 void aircraft_delete(aircraft_t* a){
 	;
+}
+
+//draws aircraft
+void aircraft_display(aircraft_t* a){
+	glPushMatrix();
+		body_apply_transform(&a->object);
+		model_display(a->model);
+	glPopMatrix();
 }
 
 //loads test settings

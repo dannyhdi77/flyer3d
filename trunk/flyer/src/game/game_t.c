@@ -18,7 +18,7 @@ int game_init(game_t *g){
 	aircraft_init(&g->player, g->player_model);
 	aircraft_load_test_settings(&g->player);
 
-	body_init(&g->teren, NULL, DISP_TERRAIN);
+	body_init(&g->teren);
 
 	camera_init(&g->camera, &g->player.object, CAMERA_DYNAMIC);
 
@@ -47,9 +47,9 @@ void game_delete(game_t* g){
 void game_render(game_t* g){
 	renderer_start(&g->renderer);
 	renderer_set_camera(&g->renderer, &g->camera.obj);
-	renderer_draw_object(&g->teren);
-	renderer_draw_object(&(g->player.object));
-	renderer_draw_object(&g->seg.obj);
+//	renderer_draw_object(&g->teren);
+	aircraft_display(&g->player);
+	segment_display(&g->seg);
 	renderer_finish(&g->renderer);
 }
 
