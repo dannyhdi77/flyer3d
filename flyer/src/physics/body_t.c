@@ -24,15 +24,46 @@ void body_init(body_t* b){
 	b->out_a = 0.0;
 }
 
-//apply object transform, second argument is renderer structure
-void body_apply_transform(body_t* obj){
+//retrieves body transformation matrix
+void body_get_transformation_matrix(body_t* obj, matrix44_t result){
 	//compute x axis vector
 	vector3_t x_axis;
 	vector3_cross_product(x_axis, obj->up, obj->forward);
 
-	//create and apply transform matrix, its a little bit too complicated to explain it here
+	//create transform matrix, its a little bit too complicated to explain it here
+	matrix44_compose(result, x_axis, 0.0, obj->up, 0.0, obj->forward, 0.0, obj->position, 1.0);
+}
+
+//retrieves inverted body transformation matrix
+void body_get_inverted_transformation_matrix(body_t* obj, matrix44_t transform){
+	//compute x axis vector
+	vector3_t x_axis;
+	vector3_cross_product(x_axis, obj->up, obj->forward);
+
+	//create and apply transform matrix, but this time transposed
+	matrix44_set_row(transform, 0, x_axis, 0.0);
+	matrix44_set_row(transform, 1, obj->up, 0.0);
+	matrix44_set_row(transform, 2, obj->forward, 0.0);
+	//last row
+	transform[3] = 0.0;
+	transform[7] = 0.0;
+	transform[11] = 0.0;
+	transform[15] = 1.0;
+
+	matrix44_t tmp;
+	vector3_t tmp_v;
+	vector3_set_v(tmp_v,obj->position);
+	vector3_invert(tmp_v);
+	matrix44_identity(tmp);
+	matrix44_set_column(tmp,3,tmp_v,1.0);
+
+	matrix44_mul(transform, tmp);
+}
+
+//apply object transform, second argument is renderer structure
+void body_apply_transform(body_t* obj){
 	matrix44_t transform;
-	matrix44_compose(transform, x_axis, 0.0, obj->up, 0.0, obj->forward, 0.0, obj->position, 1.0);
+	body_get_transformation_matrix(obj, transform);
 	glMultMatrixf(transform);
 }
 
@@ -46,24 +77,10 @@ void body_frame_invert(body_t* b){
 
 //apply inverted object transform
 void body_apply_inverted_transform(body_t* obj){
-
-	//compute x axis vector
-	vector3_t x_axis;
-	vector3_cross_product(x_axis, obj->up, obj->forward);
-
 	//create and apply transform matrix, but this time transposed
 	matrix44_t transform;
-	matrix44_set_row(transform, 0, x_axis, 0.0);
-	matrix44_set_row(transform, 1, obj->up, 0.0);
-	matrix44_set_row(transform, 2, obj->forward, 0.0);
-	//last row
-	transform[3] = 0.0;
-	transform[7] = 0.0;
-	transform[11] = 0.0;
-	transform[15] = 1.0;
-
+	body_get_inverted_transformation_matrix(obj, transform);
 	glMultMatrixf(transform);
-	glTranslatef(-obj->position[0],-obj->position[1],-obj->position[2]);
 }
 
 //sets body position

@@ -24,7 +24,7 @@ int game_init(game_t *g){
 
 	//segment_init(&g->seg,100.0);
 	//vector3_set(g->seg.color, 1.0, 0.0,0.0);
-	pipe_init(&g->pipe, 1, 5);
+	pipe_init(&g->pipe, 5);
 
 
 	//turn on the light
@@ -110,5 +110,5 @@ void game_refresh(game_t* g, int t){
 	float dt = ((float)t)/100.0;
 	aircraft_refresh(&g->player, dt);
 	camera_refresh(&g->camera, dt);
-	light_refresh(&g->light, dt, &g->player);
+	light_refresh(&g->light, dt, &g->player.object);
 }

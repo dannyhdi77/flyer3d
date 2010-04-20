@@ -38,6 +38,12 @@ void body_init(body_t*);
 //sets body position
 void body_set_position(body_t*, vector3_t);
 
+//retrieves body transformation matrix
+void body_get_transformation_matrix(body_t*, matrix44_t reslut);
+
+//retrieves inverted body transformation matrix
+void body_get_inverted_transformation_matrix(body_t*, matrix44_t reslut);
+
 //apply object transform
 void body_apply_transform(body_t*);
 

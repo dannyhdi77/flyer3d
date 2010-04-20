@@ -9,11 +9,9 @@
 
 //adds new random segment in front of pipe
 void pipe_add_segment(pipe_t* p){
-	printf("new segment\n");
 	//create new segment and add it to the queue
 	segment_t new_segment;
 	segment_t* last = (segment_t*)fifo_get_front_pointer(&p->segments);	//points to segment right behind
-	printf("Fifo : %d\n", fifo_size(&p->segments));
 	segment_t* s = &new_segment;//(segment_t*)fifo_get_front_pointer(&p->segments);
 
 	//initalize it
@@ -40,7 +38,7 @@ void pipe_add_segment(pipe_t* p){
 }
 
 //as always, initalization
-void pipe_init(pipe_t* p, int forward, int backward){
+void pipe_init(pipe_t* p, int forward){
 	body_init(&p->obj);
 	fifo_init(&p->segments,sizeof(segment_t), 2*PIPE_MAX_LENGTH);
 	pipe_add_segment(p);
