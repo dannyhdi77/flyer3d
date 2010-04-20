@@ -18,6 +18,7 @@ void segment_init(segment_t* s, float length){
 //initalizes segment as connector beetween two normal segments
 void segment_init_connector(segment_t* s, segment_t* prev, segment_t* next, float upr, float outr){
 	s->type = SEGMENT_CONNECTOR;
+	s->length = SEGMENT_GAP;
 	body_init(&s->obj);
 	//copy colors
 	vector3_set_v(s->color, prev->color);
@@ -100,3 +101,14 @@ void segment_display(segment_t* s){
 
 //pysics and so
 void segment_refresh(segment_t*, float dt);
+
+//returns 1 if point is inside segment
+int segment_in(segment_t* s, vector3_t v){
+	vector3_t tp; //transformed position
+	vector3_set_v(tp,v);
+	body_transform_vector(&s->obj, tp);
+	if(-tp[2] > s->length)
+		return 0;
+	else
+		return 1;
+}

@@ -58,4 +58,7 @@ void segment_display(segment_t*);
 //pysics and so
 void segment_refresh(segment_t*, float dt);
 
+//returns 1 if point is inside segment
+int segment_in(segment_t* s, vector3_t v);
+
 #endif /* SEGMENT_T_H_ */
