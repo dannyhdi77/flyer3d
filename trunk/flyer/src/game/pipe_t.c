@@ -41,13 +41,10 @@ void pipe_add_segment(pipe_t* p){
 void pipe_init(pipe_t* p, int forward){
 	body_init(&p->obj);
 	fifo_init(&p->segments,sizeof(segment_t), 2*PIPE_MAX_LENGTH);
-	pipe_add_segment(p);
-	pipe_add_segment(p);
-	pipe_add_segment(p);
-	pipe_add_segment(p);
-	pipe_add_segment(p);
-	//we assume that player is placed in the middle segment
-	//first, add back segments and middle segment
+	//first segments
+	int i;
+	for(i=0; i<=p->forward ; i++)
+		pipe_add_segment(p);
 
 }
 
@@ -58,7 +55,11 @@ void pipe_delete(pipe_t* p){
 
 //refreshment
 void pipe_refresh(pipe_t* p, float dt, body_t* player_body){
-
+	//transform player position into last segment space
+	vector3_t tp; //transformed position
+	vector3_set_v(tp,player_body->position);
+	body_transform_vector(&p->obj, tp);
+	vector3_print(tp);
 }
 
 //display pipe and all its segments

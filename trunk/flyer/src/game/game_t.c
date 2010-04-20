@@ -111,4 +111,5 @@ void game_refresh(game_t* g, int t){
 	aircraft_refresh(&g->player, dt);
 	camera_refresh(&g->camera, dt);
 	light_refresh(&g->light, dt, &g->player.object);
+	pipe_refresh(&g->pipe, dt, &g->player.object);
 }
