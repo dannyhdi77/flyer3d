@@ -42,3 +42,36 @@ void matrix44_compose(matrix44_t m, vector3_t v1, float x1,vector3_t v2,
 	matrix44_set_column(m,3,v4,x4);
 }
 
+//multiplies two 4x4 matrices
+//result = result*a;
+void matrix44_mul(matrix44_t result, matrix44_t a){
+	matrix44_t tmp;
+	int i,j,k;
+	for(i = 0; i<4; i++)
+		for(j = 0 ; j<4; j++){
+			tmp[j+4*i] = 0;
+			for(k = 0; k<4; k++)
+				tmp[j+4*i] += result[j + 4*k]*a[k + 4*i];
+		}
+	matrix44_copy(result, tmp);
+}
+
+//copies matrix
+void matrix44_copy(matrix44_t dest, matrix44_t src){
+	int i;
+	for(i=0; i<16; i++)
+		dest[i] = src[i];
+}
+
+//sets matrix to be identity
+void matrix44_identity(matrix44_t dest){
+	int i;
+	for(i = 0; i< 16 ; i++){
+		if(i%5 == 0){
+			dest[i] = 1.0;
+		}
+		else{
+			dest[i] = 0.0;
+		}
+	}
+}

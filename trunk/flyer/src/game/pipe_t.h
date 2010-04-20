@@ -32,13 +32,12 @@ typedef struct {
 	//fifo with pipe segments
 	fifo_t segments;
 
-	int backward;	//how many segments should be kept behind player
 	int forward;	//how many segments should be kept in front of player
 
 } pipe_t;
 
 //as always, initalization
-void pipe_init(pipe_t*, int forward, int backward);
+void pipe_init(pipe_t*, int forward);
 
 //deletion
 void pipe_delete(pipe_t*);

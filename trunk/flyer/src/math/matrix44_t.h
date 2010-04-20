@@ -28,4 +28,14 @@ void matrix44_set_row(matrix44_t m, int n , vector3_t v, float x);
  */
 void matrix44_compose(matrix44_t, vector3_t, float,vector3_t, float,vector3_t, float, vector3_t, float);
 
+//multiplies two 4x4 matrices
+//result = result*a;
+void matrix44_mul(matrix44_t result, matrix44_t a);
+
+//copies matrix
+void matrix44_copy(matrix44_t dest, matrix44_t src);
+
+//sets matrix to be identity
+void matrix44_identity(matrix44_t dest);
+
 #endif /* MATRIX44_T_H_ */
