@@ -60,6 +60,13 @@ void body_get_inverted_transformation_matrix(body_t* obj, matrix44_t transform){
 	matrix44_mul(transform, tmp);
 }
 
+//transforms vector into body space
+void body_transform_vector(body_t* obj, vector3_t v){
+	matrix44_t inv;
+	body_get_inverted_transformation_matrix(obj, inv);
+	matrix44_mul_vector(inv, v);
+}
+
 //apply object transform, second argument is renderer structure
 void body_apply_transform(body_t* obj){
 	matrix44_t transform;

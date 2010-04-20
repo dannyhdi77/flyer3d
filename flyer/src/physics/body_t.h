@@ -44,6 +44,9 @@ void body_get_transformation_matrix(body_t*, matrix44_t reslut);
 //retrieves inverted body transformation matrix
 void body_get_inverted_transformation_matrix(body_t*, matrix44_t reslut);
 
+//transforms vector into body space
+void body_transform_vector(body_t*, vector3_t);
+
 //apply object transform
 void body_apply_transform(body_t*);
 

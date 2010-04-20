@@ -38,4 +38,7 @@ void matrix44_copy(matrix44_t dest, matrix44_t src);
 //sets matrix to be identity
 void matrix44_identity(matrix44_t dest);
 
+//multiplies vector by matrix
+void matrix44_mul_vector(matrix44_t matrix, vector3_t vec);
+
 #endif /* MATRIX44_T_H_ */

@@ -75,3 +75,18 @@ void matrix44_identity(matrix44_t dest){
 		}
 	}
 }
+
+//multiplies vector by matrix
+void matrix44_mul_vector(matrix44_t matrix, vector3_t vec){
+	//in order to muliply vector, we have to extend it
+	float ev[4];	//extended vector
+	vector3_set_v(ev, vec);
+	ev[3] = 1.0;
+
+	float result[4] = {0.0,0.0,0.0,0.0};	//result of operation
+	int i,j;
+	for(i=0; i<4 ; i++)
+		for(j=0; j<4; j++)
+			result[i] += ev[j]*matrix[i+4*j];
+	vector3_set_v(vec, result);
+}
