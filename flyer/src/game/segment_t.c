@@ -107,7 +107,7 @@ int segment_in(segment_t* s, vector3_t v){
 	vector3_t tp; //transformed position
 	vector3_set_v(tp,v);
 	body_transform_vector(&s->obj, tp);
-	if(-tp[2] > s->length)
+	if(-tp[2] > s->length + SEGMENT_HOLD)
 		return 0;
 	else
 		return 1;

@@ -32,7 +32,7 @@ void aircraft_display(aircraft_t* a){
 
 //loads test settings
 void aircraft_load_test_settings(aircraft_t* a){
-	vector3_set(a->object.velocity,0.0,0.0, -8.0);
+	vector3_set(a->object.velocity,0.0,0.0, -5.0);
 	vector3_set(a->object.position, 0.0, 0.0,0.0);
 
 	//linear

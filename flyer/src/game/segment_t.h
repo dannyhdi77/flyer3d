@@ -18,6 +18,7 @@
 #define SEGMENT_N_POINTS 100.0
 #define SEGMENT_RADIUS 10
 #define SEGMENT_GAP 10.0
+#define SEGMENT_HOLD 50.0
 
 //segment types
 #define SEGMENT_NORMAL 1
