@@ -20,12 +20,7 @@ typedef struct{
 	body_t object;
 	model_t* model;
 
-	float mass; //object mass
-	vector3_t gravity;	//vector of gravity acceleration
-
-	//linear movement coeffs
-	float drag_coeff;
-	float lift_coeff;
+	float speed;	//aircrafts speed
 
 	//indicate if steers are in use, and how far are they from
 	//their balance position
