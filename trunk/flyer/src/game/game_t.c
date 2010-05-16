@@ -42,11 +42,10 @@ void game_delete(game_t* g){
 
 //displays game content on screen
 void game_render(game_t* g){
-	renderer_start(&g->system->renderer);
 	renderer_set_camera(&g->system->renderer, &g->camera.obj);
+	renderer_start(&g->system->renderer);
 	aircraft_display(&g->player);
 	pipe_display(&g->pipe);
-
 	renderer_finish(&g->system->renderer);
 }
 
