@@ -7,12 +7,8 @@
 #include "game_t.h"
 
 //Initializes game
-int game_init(game_t *g){
-	//initialize game renderer
-	renderer_init(&g->renderer);
-	default_game_renderer_settings(&g->renderer);
-	renderer_reload(&g->renderer);
-
+int game_init(game_t *g, game_system_t* sys){
+	g->system = sys;
 
 	g->player_model = model_load("data/pig.obj");
 	aircraft_init(&g->player, g->player_model);
@@ -41,25 +37,24 @@ int game_init(game_t *g){
 
 //deletes game structure
 void game_delete(game_t* g){
-	renderer_delete(&g->renderer);
 	model_delete(g->player_model);
 }
 
 //displays game content on screen
 void game_render(game_t* g){
-	renderer_start(&g->renderer);
-	renderer_set_camera(&g->renderer, &g->camera.obj);
+	renderer_start(&g->system->renderer);
+	renderer_set_camera(&g->system->renderer, &g->camera.obj);
 	aircraft_display(&g->player);
 	pipe_display(&g->pipe);
-	//segment_display(&g->seg);
-	renderer_finish(&g->renderer);
+
+	renderer_finish(&g->system->renderer);
 }
 
 //react on event
 void game_react(game_t* g, SDL_Event *ev){
 	if(ev->type == SDL_VIDEORESIZE){
-		renderer_resize(&g->renderer,ev->resize.w, ev->resize.h);
-		renderer_reload(&g->renderer);
+		renderer_resize(&g->system->renderer,ev->resize.w, ev->resize.h);
+		renderer_reload(&g->system->renderer);
 	}
 	else if(ev->type == SDL_JOYAXISMOTION){
 		if(ev->jaxis.axis == 3){
@@ -100,7 +95,7 @@ void game_react(game_t* g, SDL_Event *ev){
 	}
 	else if(ev->type == SDL_KEYDOWN){
 		printf("screenshot!\n");
-		renderer_screenshot(&g->renderer,"skrin.bmp");
+		renderer_screenshot(&g->system->renderer,"skrin.bmp");
 	}
 }
 

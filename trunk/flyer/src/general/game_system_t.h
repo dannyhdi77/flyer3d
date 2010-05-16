@@ -14,6 +14,9 @@
 #include <stdlib.h>
 #include <time.h>
 
+#include <renderer_t.h>
+#include <default_game_renderer_settings.h>
+
 //state of game definitions
 #define STATE_GAME 0
 #define STATE_MENU 1
@@ -23,6 +26,8 @@ typedef struct{
 	char state; //state of game
 
 	char n_joysticks; //number of avaliable joysticks
+
+	renderer_t renderer;	//renderer for everything
 } game_system_t;
 
 //initalizes game systems

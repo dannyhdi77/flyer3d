@@ -24,8 +24,7 @@
 
 typedef struct{
 	renderer_t renderer;	//renderer for game graphics
-	game_system_t *system;	//for state changes, etc.
-//	control_handler_t control;	//key bindings
+	game_system_t *system;	//for state changes, etc.gs
 
 
 	aircraft_t player;
@@ -40,7 +39,7 @@ typedef struct{
 } game_t;
 
 //initalizes game
-int game_init(game_t *);
+int game_init(game_t *, game_system_t*);
 
 //guess what
 void game_delete(game_t *);
