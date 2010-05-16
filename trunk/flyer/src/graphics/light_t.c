@@ -32,7 +32,7 @@ void light_set_color(light_t* l, color_t c){
 
 void light_refresh(light_t* l, float dt, body_t* player){
 	vector3_t pos;
-	vector3_t rel = {0.0, 3.0, 3.0};
+	vector3_t rel = {0.0, -3.0, -3.0};
 	vector3_set_v(pos, player->position);
 	vector3_add(pos,rel);
 	light_set_position(l,pos);

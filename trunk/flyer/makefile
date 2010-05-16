@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -g -Wall
+CFLAGS = -g -Wall 
 
 INCDIRS = -I/usr/X11R6/include `sdl-config --cflags` \
 -Isrc -Isrc/graphics -Isrc/general -Isrc/math -Isrc/game -Isrc/physics

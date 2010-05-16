@@ -44,9 +44,6 @@ void aircraft_load_test_settings(aircraft_t* a){
 
 //refreshes aircrafts state
 void aircraft_refresh(aircraft_t* a, float dt){
-	printf("%f: ", dt);
-	vector3_print(a->object.position);
-
 	vector3_set_v(a->object.velocity, a->object.forward);
 	vector3_scale(a->object.velocity, -a->speed);
 
