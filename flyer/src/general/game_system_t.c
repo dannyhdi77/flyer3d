@@ -38,11 +38,18 @@ int game_system_init(game_system_t* sys){
 	//init random number generator
 	srand(time(0));
 
+	//renderer
+	renderer_init(&sys->renderer);
+	default_game_renderer_settings(&sys->renderer);	//load default settings
+	renderer_reload(&sys->renderer);
+
 	return 0;
 }
 
 //quits game
 void game_system_quit(game_system_t* sys){
+	//delete renderer
+	renderer_delete(&sys->renderer);
 	SDL_Quit();
 	exit(0);
 }

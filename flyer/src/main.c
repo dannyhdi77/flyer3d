@@ -11,12 +11,12 @@
 int main(){
 
 	//general game system initalization
-//	game_system_t system;
-	game_system_init(NULL);
+	game_system_t system;
+	game_system_init(&system);
 
 	//initalize game
 	game_t game;
-	game_init(&game);
+	game_init(&game, &system);
 
 	//main loop
 	SDL_Event ev;
