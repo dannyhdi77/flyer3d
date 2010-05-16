@@ -14,7 +14,7 @@ int game_init(game_t *g){
 	renderer_reload(&g->renderer);
 
 
-	g->player_model = model_load("data/StarCruiser.obj");
+	g->player_model = model_load("data/pig.obj");
 	aircraft_init(&g->player, g->player_model);
 	aircraft_load_test_settings(&g->player);
 
