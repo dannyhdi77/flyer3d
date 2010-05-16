@@ -20,6 +20,8 @@
 //state of game definitions
 #define STATE_GAME 0
 #define STATE_MENU 1
+#define STATE_SPLASH_SCREEN 2
+#define STATE_QUIT 4
 
 //general game system data
 typedef struct{
@@ -38,5 +40,8 @@ void game_system_quit(game_system_t*);
 
 //writes message to a log
 void game_system_log(const char*);
+
+//takes care of state changes , etc
+void game_system_communicate(game_system_t*, int);
 
 #endif /* GAME_SYSTEM_T_H_ */

@@ -6,6 +6,7 @@
 
 #include <game_system_t.h>
 #include <game_t.h>
+#include <splash_screen_t.h>
 #include <utilties.h>
 
 int main(){
@@ -18,25 +19,49 @@ int main(){
 	game_t game;
 	game_init(&game, &system);
 
+	//create intro splash screen
+	splash_screen_t intro;
+	splash_screen_init(&intro, "data/pi.bmp" ,&system);
+
 	//main loop
 	SDL_Event ev;
 	int last_refresh_time = SDL_GetTicks();
 	int last_fps = SDL_GetTicks();
 	int nframes = 0;
-	while(1){
+	while(system.state != STATE_QUIT){
 		while(SDL_PollEvent(&ev)){
 			if(ev.type == SDL_QUIT){
 				game_system_quit(NULL);
 			}
 			else{
-				game_react(&game, &ev);
+				switch(system.state){
+					case STATE_GAME:
+						game_react(&game, &ev);
+					break;
+
+					case STATE_SPLASH_SCREEN:
+						splash_screen_react(&intro, &ev);
+					break;
+				}
 			}
 		}
 
-		game_refresh(&game, SDL_GetTicks() - last_refresh_time);
-		last_refresh_time = SDL_GetTicks();
+		switch(system.state){
+			case STATE_GAME:
+				game_refresh(&game, SDL_GetTicks() - last_refresh_time);
+				last_refresh_time = SDL_GetTicks();
+				game_render(&game);
+			break;
 
-		game_render(&game);
+			case STATE_SPLASH_SCREEN:
+				splash_screen_refresh(&intro, SDL_GetTicks() - last_refresh_time);
+				last_refresh_time = SDL_GetTicks();
+				splash_screen_render(&intro);
+			break;
+		}
+
+
+
 		//calculate fps
 		nframes++;
 		if(SDL_GetTicks() - last_fps >= 1000){
@@ -48,4 +73,5 @@ int main(){
 
 	//finish section
 	game_system_quit(NULL);
+
 }

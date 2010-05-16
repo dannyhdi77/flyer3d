@@ -43,6 +43,9 @@ int game_system_init(game_system_t* sys){
 	default_game_renderer_settings(&sys->renderer);	//load default settings
 	renderer_reload(&sys->renderer);
 
+	//set inital state
+	sys->state = STATE_SPLASH_SCREEN;
+
 	return 0;
 }
 
@@ -57,4 +60,11 @@ void game_system_quit(game_system_t* sys){
 //writes message to a log
 void game_system_log(const char* message){
 	printf("%s\n", message);
+}
+
+void game_system_communicate(game_system_t* s, int n){
+	if(s->state == STATE_SPLASH_SCREEN){
+		printf("switching to game\n");
+		s->state = STATE_GAME;
+	}
 }
