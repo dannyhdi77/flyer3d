@@ -19,7 +19,7 @@
 
 //state of game definitions
 #define STATE_GAME 0
-#define STATE_MENU 1
+#define STATE_MAIN_MENU 1
 #define STATE_SPLASH_SCREEN 2
 #define STATE_QUIT 4
 

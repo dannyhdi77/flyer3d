@@ -2,7 +2,8 @@ CC = gcc
 CFLAGS = -g -Wall 
 
 INCDIRS = -I/usr/X11R6/include `sdl-config --cflags` \
--Isrc -Isrc/graphics -Isrc/general -Isrc/math -Isrc/game -Isrc/physics -Isrc/splash_screen
+-Isrc -Isrc/graphics -Isrc/general -Isrc/math -Isrc/game \
+-Isrc/physics -Isrc/splash_screen -Isrc/menu
 
 LIBDIRS = -L/usr/X11R6/	`sdl-config --libs`
  
@@ -25,6 +26,8 @@ OBJS = $(OBJDIR)/main.o	\
 	$(OBJDIR)/game/camera_t.o \
 	$(OBJDIR)/game/segment_t.o \
 	$(OBJDIR)/game/pipe_t.o \
+	$(OBJDIR)/menu/menu_t.o \
+	$(OBJDIR)/menu/main_menu_create.o \
 	$(OBJDIR)/math/vector3_t.o \
 	$(OBJDIR)/math/matrix44_t.o \
 	$(OBJDIR)/graphics/light_t.o \

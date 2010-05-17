@@ -44,7 +44,7 @@ int game_system_init(game_system_t* sys){
 	renderer_reload(&sys->renderer);
 
 	//set inital state
-	sys->state = STATE_SPLASH_SCREEN;
+	sys->state = STATE_MAIN_MENU;
 
 	return 0;
 }
