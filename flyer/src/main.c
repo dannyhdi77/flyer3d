@@ -7,6 +7,8 @@
 #include <game_system_t.h>
 #include <game_t.h>
 #include <splash_screen_t.h>
+#include <main_menu_create.h>
+#include <menu_t.h>
 #include <utilties.h>
 
 int main(){
@@ -22,6 +24,11 @@ int main(){
 	//create intro splash screen
 	splash_screen_t intro;
 	splash_screen_init(&intro, "data/pi.bmp" ,&system);
+
+	//create main menu
+	menu_t main_menu;
+	main_menu_create(&main_menu);	//load menu data
+	menu_init(&main_menu, &system);
 
 	//main loop
 	SDL_Event ev;
@@ -42,6 +49,10 @@ int main(){
 					case STATE_SPLASH_SCREEN:
 						splash_screen_react(&intro, &ev);
 					break;
+
+					case STATE_MAIN_MENU:
+						menu_react(&main_menu, &ev);
+					break;
 				}
 			}
 		}
@@ -57,6 +68,12 @@ int main(){
 				splash_screen_refresh(&intro, SDL_GetTicks() - last_refresh_time);
 				last_refresh_time = SDL_GetTicks();
 				splash_screen_render(&intro);
+			break;
+
+			case STATE_MAIN_MENU:
+				menu_refresh(&main_menu, SDL_GetTicks() - last_refresh_time);
+				last_refresh_time = SDL_GetTicks();
+				menu_render(&main_menu);
 			break;
 		}
 
