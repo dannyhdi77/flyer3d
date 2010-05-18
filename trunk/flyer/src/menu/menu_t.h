@@ -12,6 +12,9 @@
 #include <body_t.h>
 #include <SDL/SDL.h>
 #include <renderer_t.h>
+#include <math.h>
+
+#define PI2 6.28
 
 #define MENU_MAX_FILENAME 100
 #define MENU_RADIUS 1.0
@@ -46,10 +49,6 @@ void menu_render(menu_t*);
 
 
 void menu_item_init(menu_item_t*);
-
-void menu_item_refresh(menu_item_t*, float time);
-
-void menu_item_react(menu_item_t*, SDL_Event*);
 
 void menu_item_render(menu_item_t*);
 
