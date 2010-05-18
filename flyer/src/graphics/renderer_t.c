@@ -89,7 +89,7 @@ void renderer_resize(renderer_t* r, int w, int h){
 //starts rendering mode
 void renderer_start(renderer_t* r){
 	//clear context
-	glClearColor(0.1,0.1, 0.1, 0.0);
+	glClearColor(0.0,0.0, 0.0, 0.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	//reset matrix state
 	glMatrixMode(GL_MODELVIEW);
