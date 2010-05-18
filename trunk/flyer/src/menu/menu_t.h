@@ -18,13 +18,15 @@
 
 #define MENU_MAX_FILENAME 100
 #define MENU_RADIUS 1.0
+#define MENU_ROTATION_SPEED 0.005
+#define MENU_BASE_HEIGHT 0.2
 
 typedef struct {
 	body_t obj;		//physical representation of item
 	struct menu_s* parent;
 	int texture;	//texture index, set by menu_init
 	char image_file_name[MENU_MAX_FILENAME];	//guess what
-	int w,h;	//width and height of manu image
+	int w,h;	//width and height of menu image
 } menu_item_t;
 
 struct menu_s {
@@ -34,6 +36,9 @@ struct menu_s {
 	menu_item_t *items;	//item table, allocated later
 	int n_items;	//how many items do we have
 	int index;	//index of active element
+
+	float rotation; //we store menu rotation in radians, becouse frame doesn't provide such information
+
 };
 
 typedef struct menu_s menu_t;
