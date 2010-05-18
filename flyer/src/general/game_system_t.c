@@ -44,7 +44,7 @@ int game_system_init(game_system_t* sys){
 	renderer_reload(&sys->renderer);
 
 	//set inital state
-	sys->state = STATE_MAIN_MENU;
+	sys->state = STATE_SPLASH_SCREEN;
 
 	return 0;
 }
@@ -64,6 +64,10 @@ void game_system_log(const char* message){
 
 void game_system_communicate(game_system_t* s, int n){
 	if(s->state == STATE_SPLASH_SCREEN){
+		printf("switching to MENU\n");
+		s->state = STATE_MAIN_MENU;
+	}
+	else if(s->state == STATE_MAIN_MENU){
 		printf("switching to game\n");
 		s->state = STATE_GAME;
 	}
