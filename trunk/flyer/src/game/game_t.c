@@ -93,8 +93,44 @@ void game_react(game_t* g, SDL_Event *ev){
 		}
 	}
 	else if(ev->type == SDL_KEYDOWN){
-		printf("screenshot!\n");
-		renderer_screenshot(&g->system->renderer,"skrin.bmp");
+		//printf("screenshot!\n");
+		//renderer_screenshot(&g->system->renderer,"skrin.bmp");
+		switch(ev->key.keysym.sym){
+			case SDLK_RIGHT:
+				g->player.tail = ANGLE_STEP;
+			break;
+
+			case SDLK_LEFT:
+				g->player.tail = -ANGLE_STEP;
+			break;
+
+			case SDLK_UP:
+				g->player.elevator = ANGLE_STEP;
+			break;
+
+			case SDLK_DOWN:
+				g->player.elevator = -ANGLE_STEP;
+			break;
+		}
+	}
+	else if(ev->type == SDL_KEYUP){
+		switch(ev->key.keysym.sym){
+			case SDLK_RIGHT:
+				g->player.tail = 0;
+			break;
+
+			case SDLK_LEFT:
+				g->player.tail = 0;
+			break;
+
+			case SDLK_UP:
+				g->player.elevator = 0;
+			break;
+
+			case SDLK_DOWN:
+				g->player.elevator = 0;
+			break;
+		}
 	}
 }
 
@@ -106,4 +142,5 @@ void game_refresh(game_t* g, int t){
 	camera_refresh(&g->camera, dt);
 	light_refresh(&g->light, dt, &g->player.object);
 	pipe_refresh(&g->pipe, dt, &g->player.object);
+	//perform collision check
 }

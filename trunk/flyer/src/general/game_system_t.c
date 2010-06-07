@@ -44,12 +44,12 @@ int game_system_init(game_system_t* sys){
 	renderer_reload(&sys->renderer);
 
 	//set inital state
-	sys->state = STATE_SPLASH_SCREEN;
+	sys->state = STATE_GAME;
 
 	return 0;
 }
 
-//quits game
+//exits game
 void game_system_quit(game_system_t* sys){
 	//delete renderer
 	renderer_delete(&sys->renderer);
@@ -57,7 +57,7 @@ void game_system_quit(game_system_t* sys){
 	exit(0);
 }
 
-//writes message to a log
+//writes message to log
 void game_system_log(const char* message){
 	printf("%s\n", message);
 }
