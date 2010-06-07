@@ -114,11 +114,11 @@ void menu_item_render(menu_item_t* item){
 		glVertex3f(-dx, dy ,0.0);
 		glVertex3f( dx, dy ,0.0);
 		glVertex3f( dx, -dy ,0.0);
-
+/*
 		glVertex3f(-dx, -dy ,0.1);
 		glVertex3f(-dx, dy ,0.1);
 		glVertex3f( dx, dy ,0.1);
-		glVertex3f( dx, -dy ,0.1);
+		glVertex3f( dx, -dy ,0.1);*/
 	glEnd();
 	glPopMatrix();
 }

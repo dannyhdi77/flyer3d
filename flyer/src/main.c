@@ -11,7 +11,7 @@
 #include <menu_t.h>
 #include <utilties.h>
 
-int main(){
+int main(int argc, char** argv){
 
 	//general game system initalization
 	game_system_t system;
