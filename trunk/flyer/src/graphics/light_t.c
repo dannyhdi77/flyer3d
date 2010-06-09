@@ -31,9 +31,13 @@ void light_set_color(light_t* l, color_t c){
 }
 
 void light_refresh(light_t* l, float dt, body_t* player){
-	vector3_t pos;
-	vector3_t rel = {0.0, -3.0, -3.0};
-	vector3_set_v(pos, player->position);
-	vector3_add(pos,rel);
-	light_set_position(l,pos);
+	vector3_t rel = {0.0, -3.0, -20.0};
+	matrix44_t transform;
+	body_get_transformation_matrix(player, transform);
+	matrix44_mul_vector(transform, rel);
+
+	vector3_print(rel);
+	light_set_position(l,rel);
+
+	//light_set_position(l,rel);
 }
