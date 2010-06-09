@@ -16,7 +16,7 @@ void pipe_add_segment(pipe_t* p){
 
 	//initalize it
 	segment_init(s, random_range(PIPE_MIN_SEGMENT_LENGTH, PIPE_MAX_SEGMENT_LENGTH));
-	vector3_set(s->color,random_range(0.0,1.0),random_range(0.0,1.0),random_range(0.0,1.0));
+	vector3_set(s->color,random_range(0.7,1.0),random_range(0.0,0.3),random_range(0.0,0.3));
 
 	if(fifo_size(&p->segments) > 0){
 		//we create connector

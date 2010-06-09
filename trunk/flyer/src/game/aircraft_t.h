@@ -12,6 +12,7 @@
 #include <renderer_t.h>
 #include <vector3_t.h>
 #include <model_t.h>
+#include <fire_t.h>
 
 #define A_ACTIVE 1
 #define A_INACTIVE 2
@@ -35,6 +36,8 @@ typedef struct{
 
 	float thrust;
 
+	//fire behind
+	fire_t fire;
 } aircraft_t;
 
 //initalizes aircraft structure with its model
