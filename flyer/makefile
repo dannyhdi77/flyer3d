@@ -17,6 +17,7 @@ OBJS = $(OBJDIR)/main.o	\
 	$(OBJDIR)/general/fifo_t.o	\
 	$(OBJDIR)/graphics/model_t.o	\
 	$(OBJDIR)/graphics/renderer_t.o \
+	$(OBJDIR)/graphics/fire_t.o \
 	$(OBJDIR)/general/game_system_t.o \
 	$(OBJDIR)/splash_screen/splash_screen_t.o \
 	$(OBJDIR)/general/utilties.o \

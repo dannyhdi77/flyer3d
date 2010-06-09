@@ -15,11 +15,12 @@ void aircraft_init(aircraft_t* a, model_t* m){
 	a->elevator = 0.0;
 	a->tail = 0.0;
 
+	fire_init(&a->fire);
 }
 
 //deletes aircraft
 void aircraft_delete(aircraft_t* a){
-	;
+	fire_delete(&a->fire);
 }
 
 //draws aircraft
@@ -27,6 +28,7 @@ void aircraft_display(aircraft_t* a){
 	glPushMatrix();
 		body_apply_transform(&a->object);
 		model_display(a->model);
+		fire_display(&a->fire);
 	glPopMatrix();
 }
 
@@ -53,4 +55,7 @@ void aircraft_refresh(aircraft_t* a, float dt){
 	a->object.out_v = a->elevator*a->out_coeff*a->speed;
 
 	body_do_kinematics(&a->object, dt);
+
+	//refresh fire effect
+	fire_refresh(&a->fire,dt);
 }
