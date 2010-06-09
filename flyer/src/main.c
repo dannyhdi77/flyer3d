@@ -12,6 +12,19 @@
 #include <utilties.h>
 
 int main(int argc, char** argv){
+	//parse command line arguments
+/*	int show_fps = 0;
+	if(argc = 2){
+		if(0 == strcmp("showfps", argv[1])){
+			printf("fps display active\n");
+			show_fps = 1;
+		}
+	}
+*/
+
+	//initalize glut library, which provides
+	//function for text display
+	glutInit(&argc, argv);
 
 	//general game system initalization
 	game_system_t system;
@@ -46,7 +59,7 @@ int main(int argc, char** argv){
 						game_react(&game, &ev);
 					break;
 
-					case STATE_SPLASH_SCREEN:
+					case STATE_INTRO:
 						splash_screen_react(&intro, &ev);
 					break;
 
@@ -64,7 +77,7 @@ int main(int argc, char** argv){
 				game_render(&game);
 			break;
 
-			case STATE_SPLASH_SCREEN:
+			case STATE_INTRO:
 				splash_screen_refresh(&intro, SDL_GetTicks() - last_refresh_time);
 				last_refresh_time = SDL_GetTicks();
 				splash_screen_render(&intro);

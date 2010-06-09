@@ -10,7 +10,7 @@
 int game_init(game_t *g, game_system_t* sys){
 	g->system = sys;
 
-	g->player_model = model_load("data/pig.obj");
+	g->player_model = model_load("data/skull.obj");
 	aircraft_init(&g->player, g->player_model);
 	aircraft_load_test_settings(&g->player);
 
@@ -46,6 +46,14 @@ void game_render(game_t* g){
 	renderer_start(&g->system->renderer);
 	aircraft_display(&g->player);
 	pipe_display(&g->pipe);
+
+	//display point counter
+	vector3_t rel = {0.0,0.0,2.0};
+	matrix44_t transform;
+	body_get_transformation_matrix(&g->player.object, transform);
+	matrix44_mul_vector(transform, rel);
+	printw(rel[0],rel[1],rel[2],0,0,0,"%d",game_system_score(g->system));
+
 	renderer_finish(&g->system->renderer);
 }
 
@@ -142,8 +150,19 @@ void game_refresh(game_t* g, int t){
 	camera_refresh(&g->camera, dt);
 	light_refresh(&g->light, dt, &g->player.object);
 	pipe_refresh(&g->pipe, dt, &g->player.object);
+
 	//perform collision check
 	if(pipe_collision(&g->pipe,&g->player.object.position)){
-		printf("fest kupa\n");
+		game_system_communicate(g->system,0);
 	}
+
+	//increase score
+	static int last_score = 0;
+	last_score += t;
+	if(last_score > POINT_WAIT){
+		last_score = 0;
+		game_system_score_add(g->system,1);
+	}
+
+	//increase speed
 }

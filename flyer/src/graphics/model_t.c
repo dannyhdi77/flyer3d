@@ -222,9 +222,9 @@ void model_display(model_t* m){
 			for(j=0; j <= m->polygons[i].n_vert; j++){
 				a = j%m->polygons[i].n_vert;
 				if(m->polygons[i].vertexes[a].normal >= 0){
-					glNormal3f(m->normals[m->polygons[i].vertexes[a].normal].x,
-							m->normals[m->polygons[i].vertexes[a].normal].y,
-							m->normals[m->polygons[i].vertexes[a].normal].z);
+					glNormal3f(-m->normals[m->polygons[i].vertexes[a].normal].x,
+							-m->normals[m->polygons[i].vertexes[a].normal].y,
+							-m->normals[m->polygons[i].vertexes[a].normal].z);
 				}
 
 				glVertex3f(m->points[m->polygons[i].vertexes[a].position].x,
