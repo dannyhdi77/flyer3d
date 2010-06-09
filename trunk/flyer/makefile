@@ -3,11 +3,11 @@ CFLAGS = -g -Wall
 
 INCDIRS = -I/usr/X11R6/include `sdl-config --cflags` \
 -Isrc -Isrc/graphics -Isrc/general -Isrc/math -Isrc/game \
--Isrc/physics -Isrc/splash_screen -Isrc/menu
+-Isrc/physics -Isrc/splash_screen -Isrc/menu 
 
 LIBDIRS = -L/usr/X11R6/	`sdl-config --libs`
  
-LIBS = -lX11 -lXi -lXmu -lGL -lGLU -lm
+LIBS = -lX11 -lXi -lXmu -lGL -lGLU -lm -lglut
 
 OBJDIR = bin
 SRCDIR = src
@@ -20,6 +20,7 @@ OBJS = $(OBJDIR)/main.o	\
 	$(OBJDIR)/general/game_system_t.o \
 	$(OBJDIR)/splash_screen/splash_screen_t.o \
 	$(OBJDIR)/general/utilties.o \
+	$(OBJDIR)/general/printw.o \
 	$(OBJDIR)/game/game_t.o \
 	$(OBJDIR)/game/control_handler_t.o \
 	$(OBJDIR)/game/aircraft_t.o \

@@ -18,9 +18,11 @@
 #include <camera_t.h>
 #include <segment_t.h>
 #include <pipe_t.h>
+#include <printw.h>
 
 #define ANGLE_STEP 0.005
 #define FSPEED -0.1
+#define POINT_WAIT 100
 
 typedef struct{
 	renderer_t renderer;	//renderer for game graphics
