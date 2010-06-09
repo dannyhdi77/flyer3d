@@ -25,7 +25,7 @@
 #define SEGMENT_CONNECTOR 2
 
 typedef struct {
-	//segment type, true or connector
+	//segment type, straight or connector
 	int type;
 
 	//segment position and orientation
@@ -44,6 +44,12 @@ typedef struct {
 
 } segment_t;
 
+//structure that holds collision check and its result
+struct collision_s{
+	int collides;
+	vector3_t point;
+};
+
 //sets some basic properties
 void segment_init(segment_t*, float length);
 
@@ -54,12 +60,15 @@ void segment_init_connector(segment_t*, segment_t* prev, segment_t* next, float 
 void segment_delete(segment_t*);
 
 //prints segment
-void segment_display(segment_t*);
+void segment_display(segment_t*, void*);
 
 //pysics and so
 void segment_refresh(segment_t*, float dt);
 
 //returns 1 if point is inside segment
 int segment_in(segment_t* s, vector3_t v);
+
+//returns 1 if point collides with segment
+void segment_collide(segment_t *s, struct collision_s*);
 
 #endif /* SEGMENT_T_H_ */

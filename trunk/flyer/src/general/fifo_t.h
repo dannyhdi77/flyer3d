@@ -48,8 +48,8 @@ int fifo_get(fifo_t*, void*);
 int fifo_size(fifo_t*);
 
 //iterate fifo contents with specified function
-typedef void (*fifo_fun)(void*);
-void fifo_iterate(fifo_t*, fifo_fun f);
+typedef void (*fifo_fun)(void*, void*);
+void fifo_iterate(fifo_t*, fifo_fun f, void*);
 
 //returns pointer to front of fifo
 void* fifo_get_front_pointer(fifo_t*);

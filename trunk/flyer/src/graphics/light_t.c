@@ -35,8 +35,6 @@ void light_refresh(light_t* l, float dt, body_t* player){
 	matrix44_t transform;
 	body_get_transformation_matrix(player, transform);
 	matrix44_mul_vector(transform, rel);
-
-	vector3_print(rel);
 	light_set_position(l,rel);
 
 	//light_set_position(l,rel);

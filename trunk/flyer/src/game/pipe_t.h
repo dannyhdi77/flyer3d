@@ -48,4 +48,7 @@ void pipe_refresh(pipe_t*, float dt, body_t* player_body);
 //display pipe and all its segments
 void pipe_display(pipe_t*);
 
+//check if given point collides with the pipe
+int pipe_collsion(pipe_t*, vector3_t);
+
 #endif /* PIPE_T_H_ */
