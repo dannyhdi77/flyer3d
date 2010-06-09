@@ -71,6 +71,14 @@ void pipe_display(pipe_t* p){
 	glPushMatrix();
 	body_apply_transform(&p->obj);
 	//print all segments
-	fifo_iterate(&p->segments,segment_display);
+	fifo_iterate(&p->segments,segment_display,NULL);
 	glPopMatrix();
+}
+
+int pipe_collision(pipe_t* p, vector3_t point){
+	struct collision_s col;
+	vector3_set_v(col.point, point);
+	col.collides = 0;
+	fifo_iterate(&p->segments,segment_collide,&col);
+	return col.collides;
 }

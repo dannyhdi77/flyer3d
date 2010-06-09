@@ -76,10 +76,10 @@ void* fifo_get_back_pointer(fifo_t* f){
 
 
 //iterate fifo content with specified function
-void fifo_iterate(fifo_t* q, fifo_fun f){
+void fifo_iterate(fifo_t* q, fifo_fun f, void* opt_args){
 	void *itr = q->last;
 	while(itr != q->first){
-		(*f)(itr);	//invoke desired function
+		(*f)(itr, opt_args);	//invoke desired function
 		itr = (char*)itr + q->elem_size;
 		if(itr - q->data >= q->elem_size*q->max_size)
 			itr = q->data;

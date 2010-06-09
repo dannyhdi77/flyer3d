@@ -38,7 +38,7 @@ void segment_delete(segment_t* s){
 }
 
 //prints segment
-void segment_display(segment_t* s){
+void segment_display(segment_t* s, void* nul){
 	glPushMatrix();
 	body_apply_transform(&s->obj);
 	int i;
@@ -111,4 +111,27 @@ int segment_in(segment_t* s, vector3_t v){
 		return 0;
 	else
 		return 1;
+}
+
+
+void segment_collide(segment_t *s, struct collision_s* c){
+	vector3_t tp; //transformed position
+	vector3_set_v(tp,c->point);
+	body_transform_vector(&s->obj, tp);
+	//vector3_print(tp);
+
+	int result = 0;
+	//first of all, we check z coordinate
+	if((-tp[2] > 0)&&(-tp[2] < s->length)){
+		if(sqrt(tp[0]*tp[0] + tp[1]*tp[1]) > SEGMENT_RADIUS){
+			result = 1;
+		}
+		else{
+			result = 0;
+		}
+	}
+	else{
+		result =  0;
+	}
+	c->collides |= result;
 }
