@@ -23,7 +23,9 @@ void particle_display(particle_t* p, vector3_t* palette){
 	if(color_index > 255){
 		color_index = 255;
 	}
+	color_index = 255-color_index;
 	glColor3f(palette[color_index][0],palette[color_index][1],palette[color_index][2]);
+
 	glVertex3f(p->position[0],p->position[1],p->position[2]);
 }
 
@@ -74,10 +76,13 @@ void fire_refresh(fire_t* f, float dt){
 }
 
 void fire_display(fire_t* f){
-	glColor3f(1.0,0.0,0.0);
+	glPushMatrix();
+	body_apply_transform(&f->object);
 	glPointSize(5.0);
-	glBegin(GL_POINTS);
-	glNormal3f(0.0,0.0,-1.0);
+	glBegin(GL_TRIANGLES);
+	glNormal3f(0.0,0.0,f->normal_direction);
 	fifo_iterate(&f->particles,&particle_display,f->palette);
 	glEnd();
+
+	glPopMatrix();
 }

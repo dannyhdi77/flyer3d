@@ -19,6 +19,15 @@ void menu_init(menu_t* m, game_system_t* sys){
 	m->camera.position[1] = 0.5;
 	m->system = sys;
 
+
+	light_set_index(&m->light, 0);
+	vector3_t pos = {0.0, 10.0, 0.0};
+	light_set_position(&m->light, pos);
+	color_t col = {1.0, 1.0, 1.0};
+	light_set_color(&m->light,col);
+	light_on(&m->light);
+
+
 	float angle_step = PI2/((float)m->n_items);
 	float angle = 0.0;
 
@@ -31,6 +40,14 @@ void menu_init(menu_t* m, game_system_t* sys){
 		body_move_forward(&m->items[i].obj, MENU_RADIUS);
 		angle += angle_step;
 	}
+
+	m->skull_model = model_load("data/skull.obj");
+	aircraft_init(&m->skull, m->skull_model);
+	m->skull.object.position[1] = 2.0;
+	m->skull.fire.normal_direction = -1.0;
+	vector3_set(m->skull.object.forward,0.0,0.0,-1.0);
+
+	body_rotate(&m->skull.object,B_UP,-0.1);
 }
 
 void menu_refresh(menu_t* m, float time){
@@ -49,6 +66,7 @@ void menu_refresh(menu_t* m, float time){
 		m->rotation = 0.0;
 		m->obj.up_v = 0.0;
 	}
+	aircraft_refresh(&m->skull, time/100.0);
 }
 
 void menu_react(menu_t* m, SDL_Event* e){
@@ -67,23 +85,15 @@ void menu_react(menu_t* m, SDL_Event* e){
 	}
 }
 
+#define SKULL_SCALE 0.3
 void menu_render(menu_t* m){
+	vector3_t pos = {0.0, 10.0, 0.0};
+	light_set_position(&m->light, pos);
+
 	renderer_set_camera(&m->system->renderer, &m->camera);
 	renderer_start(&m->system->renderer);
 
-/*	int j;
-	glColor3f(1.0,1.0,1.0);
-	glBegin(GL_LINES);
-		for(j=0 ; j<10; j++){
-			glVertex3f(-1.0 + j*0.2,0.0, -10.0);
-			glVertex3f(-1.0 + j*0.2,0.0, 10.0);
-		}
-
-		glColor3f(1.0,0.0,0.0);
-		glVertex3f(0.0,0.0,0.0);
-		glVertex3f(0.0,0.3,0.0);
-	glEnd();
-*/
+	glPushMatrix();
 	//apply menu transform
 	body_apply_transform(&m->obj);
 
@@ -92,6 +102,10 @@ void menu_render(menu_t* m){
 	for(i=0; i<m->n_items ; i++){
 		menu_item_render(&(m->items[i]));
 	}
+	glPopMatrix();
+	//display skull
+	glScalef(SKULL_SCALE,SKULL_SCALE,SKULL_SCALE);
+	aircraft_display(&m->skull);
 
 	renderer_finish(&m->system->renderer);
 }
@@ -108,7 +122,7 @@ void menu_item_render(menu_item_t* item){
 	float dy = MENU_BASE_HEIGHT/2.0;
 	glPushMatrix();
 	body_apply_transform(&item->obj);
-	glColor3f(0.0,1.0,0.0);
+	glColor3f(1.0,0.0,0.0);
 	glBegin(GL_QUADS);
 		glVertex3f(-dx, -dy ,0.0);
 		glVertex3f(-dx, dy ,0.0);
@@ -121,4 +135,9 @@ void menu_item_render(menu_item_t* item){
 		glVertex3f( dx, -dy ,0.1);*/
 	glEnd();
 	glPopMatrix();
+}
+
+void menu_delete(menu_t* m){
+	model_delete(&m->skull_model);
+	aircraft_delete(&m->skull);
 }

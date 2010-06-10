@@ -13,6 +13,8 @@
 #include <SDL/SDL.h>
 #include <renderer_t.h>
 #include <math.h>
+#include <aircraft_t.h>
+#include <light_t.h>
 
 #define PI2 6.28
 
@@ -38,7 +40,9 @@ struct menu_s {
 	int index;	//index of active element
 
 	float rotation; //we store menu rotation in radians, becouse frame doesn't provide such information
-
+	aircraft_t skull;
+	model_t* skull_model;
+	light_t light;
 };
 
 typedef struct menu_s menu_t;
@@ -57,5 +61,6 @@ void menu_item_init(menu_item_t*);
 
 void menu_item_render(menu_item_t*);
 
+void menu_delete(menu_t*);
 
 #endif /* MENU_T_H_ */
