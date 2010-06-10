@@ -41,6 +41,7 @@ void aircraft_load_test_settings(aircraft_t* a){
 	a->out_coeff = 3.0;
 
 	a->speed = 5.0;
+	a->fire.normal_direction = -1.0;
 }
 
 
