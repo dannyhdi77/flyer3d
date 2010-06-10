@@ -17,8 +17,8 @@ void main_menu_create(menu_t* m){
 	strcpy( m->items[1].image_file_name, "data/menu/wyniki.bmp");
 
 	m->items[2].parent = m;
-	strcpy( m->items[2].image_file_name, "data/menu/koniec.bmp");
+	strcpy( m->items[2].image_file_name, "data/menu/3dopcje.bmp");
 
 	m->items[3].parent = m;
-	strcpy( m->items[3].image_file_name, "data/menu/3dopcje.bmp");
+	strcpy( m->items[3].image_file_name, "data/menu/koniec.bmp");
 }

@@ -69,8 +69,22 @@ void game_system_communicate(game_system_t* s, int n){
 		s->state = STATE_MAIN_MENU;
 	}
 	else if(s->state == STATE_MAIN_MENU){
-		printf("switching to game\n");
-		s->state = STATE_GAME;
+		printf("%d\n",n);
+		switch(n){
+			case 1:
+				s->state = STATE_QUIT;
+				break;
+			case 0:
+				s->state = STATE_GAME;
+				break;
+			case 3:
+				s->state = STATE_GAME;
+				break;
+			case 2:
+				s->state = STATE_GAME;
+				break;
+		}
+		//s->state = STATE_GAME;
 	}
 	else if(s->state == STATE_GAME){
 		if(n == 0){

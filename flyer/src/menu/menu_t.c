@@ -82,7 +82,9 @@ void menu_react(menu_t* m, SDL_Event* e){
 			m->obj.up_v = -MENU_ROTATION_SPEED;
 		}
 		else if(e->key.keysym.sym == SDLK_RETURN){
+			if(m->obj.up_v == 0.0){
 			game_system_communicate(m->system, m->index);
+			}
 		}
 	}
 }

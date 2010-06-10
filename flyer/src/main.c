@@ -102,6 +102,8 @@ int main(int argc, char** argv){
 	}
 
 	//finish section
+	game_delete(&game);
+	splash_screen_delete(&intro);
 	game_system_quit(NULL);
 
 }
