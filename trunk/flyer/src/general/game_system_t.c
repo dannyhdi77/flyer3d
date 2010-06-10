@@ -44,7 +44,7 @@ int game_system_init(game_system_t* sys){
 	renderer_reload(&sys->renderer);
 
 	//set inital state
-	sys->state = STATE_GAME;
+	sys->state = STATE_MAIN_MENU;
 
 	sys->score = 0;
 	return 0;

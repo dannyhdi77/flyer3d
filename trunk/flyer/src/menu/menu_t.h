@@ -9,6 +9,7 @@
 #define MENU_T_H_
 
 #include <game_system_t.h>
+#include <load_texture.h>
 #include <body_t.h>
 #include <SDL/SDL.h>
 #include <renderer_t.h>
@@ -37,6 +38,7 @@ struct menu_s {
 	game_system_t *system;
 	menu_item_t *items;	//item table, allocated later
 	int n_items;	//how many items do we have
+	int textures[10];
 	int index;	//index of active element
 
 	float rotation; //we store menu rotation in radians, becouse frame doesn't provide such information

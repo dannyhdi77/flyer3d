@@ -60,6 +60,8 @@ void renderer_reload(renderer_t* r){
 		glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
 
 	}
+	//enable texturing
+	glEnable(GL_TEXTURE_2D);
 
 	//set proper winding
 	glFrontFace(r->winding);

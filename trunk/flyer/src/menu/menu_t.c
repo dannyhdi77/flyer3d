@@ -19,10 +19,8 @@ void menu_init(menu_t* m, game_system_t* sys){
 	m->camera.position[1] = 0.5;
 	m->system = sys;
 
-
+	// turn on the light
 	light_set_index(&m->light, 0);
-	vector3_t pos = {0.0, 10.0, 0.0};
-	light_set_position(&m->light, pos);
 	color_t col = {1.0, 1.0, 1.0};
 	light_set_color(&m->light,col);
 	light_on(&m->light);
@@ -48,6 +46,9 @@ void menu_init(menu_t* m, game_system_t* sys){
 	vector3_set(m->skull.object.forward,0.0,0.0,-1.0);
 
 	body_rotate(&m->skull.object,B_UP,-0.1);
+
+	//load textures
+	m->items[0].texture = load_texture("data/menu/nowa_gra.bmp");
 }
 
 void menu_refresh(menu_t* m, float time){
@@ -87,7 +88,7 @@ void menu_react(menu_t* m, SDL_Event* e){
 
 #define SKULL_SCALE 0.3
 void menu_render(menu_t* m){
-	vector3_t pos = {0.0, 10.0, 0.0};
+	vector3_t pos = {1.0, -3.0, -3.0};
 	light_set_position(&m->light, pos);
 
 	renderer_set_camera(&m->system->renderer, &m->camera);
@@ -123,10 +124,16 @@ void menu_item_render(menu_item_t* item){
 	glPushMatrix();
 	body_apply_transform(&item->obj);
 	glColor3f(1.0,0.0,0.0);
+	glNormal3f(0.0,0.0,-1.0);
+	glBindTexture(GL_TEXTURE_2D, item->texture);
 	glBegin(GL_QUADS);
+		glTexCoord2f(0.0,0.0);
 		glVertex3f(-dx, -dy ,0.0);
+		glTexCoord2f(1.0,0.0);
 		glVertex3f(-dx, dy ,0.0);
+		glTexCoord2f(1.0,1.0);
 		glVertex3f( dx, dy ,0.0);
+		glTexCoord2f(0.0,1.0);
 		glVertex3f( dx, -dy ,0.0);
 /*
 		glVertex3f(-dx, -dy ,0.1);
@@ -138,6 +145,6 @@ void menu_item_render(menu_item_t* item){
 }
 
 void menu_delete(menu_t* m){
-	model_delete(&m->skull_model);
+	model_delete(m->skull_model);
 	aircraft_delete(&m->skull);
 }
