@@ -34,6 +34,7 @@ void menu_init(menu_t* m, game_system_t* sys){
 		menu_item_init(&m->items[i]);
 		m->items[i].h = 100;
 		m->items[i].w = 300;
+		m->items[i].texture = load_texture(m->items[i].image_file_name);
 		body_rotate(&(m->items[i].obj), B_UP, angle);
 		body_move_forward(&m->items[i].obj, MENU_RADIUS);
 		angle += angle_step;
@@ -47,8 +48,6 @@ void menu_init(menu_t* m, game_system_t* sys){
 
 	body_rotate(&m->skull.object,B_UP,-0.1);
 
-	//load textures
-	m->items[0].texture = load_texture("data/menu/nowa_gra.bmp");
 }
 
 void menu_refresh(menu_t* m, float time){
@@ -82,7 +81,9 @@ void menu_react(menu_t* m, SDL_Event* e){
 		else if(e->key.keysym.sym == SDLK_RIGHT){
 			m->obj.up_v = -MENU_ROTATION_SPEED;
 		}
-
+		else if(e->key.keysym.sym == SDLK_RETURN){
+			game_system_communicate(m->system, m->index);
+		}
 	}
 }
 
@@ -99,10 +100,12 @@ void menu_render(menu_t* m){
 	body_apply_transform(&m->obj);
 
 	//display all menu items
+	glEnable(GL_TEXTURE_2D);
 	int i;
 	for(i=0; i<m->n_items ; i++){
 		menu_item_render(&(m->items[i]));
 	}
+	glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
 	//display skull
 	glScalef(SKULL_SCALE,SKULL_SCALE,SKULL_SCALE);
@@ -116,6 +119,9 @@ void menu_item_init(menu_item_t* item){
 	body_init(&item->obj);
 }
 
+void menu_item_delete(menu_item_t* item){
+	glDeleteTextures(1,&item->texture);
+}
 
 void menu_item_render(menu_item_t* item){
 	float ratio = ((float)item->w)/((float)item->h);
@@ -123,23 +129,21 @@ void menu_item_render(menu_item_t* item){
 	float dy = MENU_BASE_HEIGHT/2.0;
 	glPushMatrix();
 	body_apply_transform(&item->obj);
-	glColor3f(1.0,0.0,0.0);
+	glColor4f(1.0,0.0,0.0,1.0);
 	glNormal3f(0.0,0.0,-1.0);
 	glBindTexture(GL_TEXTURE_2D, item->texture);
 	glBegin(GL_QUADS);
-		glTexCoord2f(0.0,0.0);
-		glVertex3f(-dx, -dy ,0.0);
-		glTexCoord2f(1.0,0.0);
-		glVertex3f(-dx, dy ,0.0);
-		glTexCoord2f(1.0,1.0);
-		glVertex3f( dx, dy ,0.0);
 		glTexCoord2f(0.0,1.0);
+		glVertex3f(-dx, -dy ,0.0);
+
+		glTexCoord2f(0.0,0.0);
+		glVertex3f(-dx, dy ,0.0);
+
+		glTexCoord2f(1.0,0.0);
+		glVertex3f( dx, dy ,0.0);
+
+		glTexCoord2f(1.0,1.0);
 		glVertex3f( dx, -dy ,0.0);
-/*
-		glVertex3f(-dx, -dy ,0.1);
-		glVertex3f(-dx, dy ,0.1);
-		glVertex3f( dx, dy ,0.1);
-		glVertex3f( dx, -dy ,0.1);*/
 	glEnd();
 	glPopMatrix();
 }
@@ -147,4 +151,8 @@ void menu_item_render(menu_item_t* item){
 void menu_delete(menu_t* m){
 	model_delete(m->skull_model);
 	aircraft_delete(&m->skull);
+	int i;
+	for(i=0; i<m->n_items ; i++){
+		menu_item_delete(&(m->items[i]));
+	}
 }
