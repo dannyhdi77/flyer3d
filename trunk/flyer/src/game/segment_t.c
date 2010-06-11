@@ -8,8 +8,9 @@
 #include <segment_t.h>
 
 //sets some basic properties
-void segment_init(segment_t* s, float length){
+void segment_init(segment_t* s, float length, int texture_index){
 	s->type = SEGMENT_NORMAL;
+	s->texture = texture_index;
 	body_init(&s->obj);
 	s->length = length;
 	vector3_set(s->color, 1.0, 0.0, 0.0);	//default color
@@ -41,18 +42,26 @@ void segment_delete(segment_t* s){
 void segment_display(segment_t* s, void* nul){
 	glPushMatrix();
 	body_apply_transform(&s->obj);
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D,s->texture);
 	int i;
+	float tex_coord;
 	float angle_step = 2*3.1415/SEGMENT_N_POINTS;
 	float x,y, angle = 0;
 	if(s->type == SEGMENT_NORMAL){
+
 		glBegin(GL_TRIANGLE_STRIP);
 		glColor3f(s->color[0], s->color[1], s->color[2]);
 		for(i = 0; i<SEGMENT_N_POINTS+2; i++){
+			tex_coord = ((float)i)/SEGMENT_N_POINTS;
 			x = SEGMENT_RADIUS*cos(angle);
 			y = SEGMENT_RADIUS*sin(angle);
 
 			glNormal3f(-cos(angle), -sin(angle),0.0);
+
+			glTexCoord2f(tex_coord,0.0);
 			glVertex3f(x,y,0.0);
+			glTexCoord2f(tex_coord,1.0);
 			glVertex3f(x,y,-s->length);
 
 			angle += angle_step;
@@ -69,13 +78,16 @@ void segment_display(segment_t* s, void* nul){
 		vector3_rotate(vy,vx,s->out_rotation);
 
 		for(i = 0; i<SEGMENT_N_POINTS+2; i++){
+			tex_coord = ((float)i)/SEGMENT_N_POINTS;
 			x = SEGMENT_RADIUS*cos(angle);
 			y = SEGMENT_RADIUS*sin(angle);
-			glColor3f(s->color[0], s->color[1], s->color[2]);
-			glNormal3f(-cos(angle), -sin(angle),0.0);
-			glVertex3f(x,y,0.0);
+			//glColor3f(s->color[0], s->color[1], s->color[2]);
 
-			glColor3f(s->next_color[0], s->next_color[1], s->next_color[2]);
+			glNormal3f(-cos(angle), -sin(angle),0.0);
+			//glTexCoord2f(tex_coord,0.0);
+			glVertex3f(x,y,0.0);
+			glColor3f(0.1,0.0,0.0);
+			//glColor3f(s->next_color[0], s->next_color[1], s->next_color[2]);
 			vector3_set(p,0.0,0.0,-SEGMENT_GAP);
 			vector3_set(normal, 0.0,0.0,0.0);
 
@@ -90,12 +102,15 @@ void segment_display(segment_t* s, void* nul){
 			vector3_add(normal, term);
 			vector3_normalize(normal);
 			glNormal3f(-normal[0], -normal[1], -normal[2]);
+			//glTexCoord2f(tex_coord,1.0);
+			glColor3f(0.1,0.0,0.0);
 			glVertex3f(p[0], p[1], p[2]);
 
 			angle += angle_step;
 		}
 		glEnd();
 	}
+	glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
 }
 

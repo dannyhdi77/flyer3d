@@ -7,7 +7,9 @@
 
 #include <pipe_t.h>
 
+
 //adds new random segment in front of pipe
+#define SEGMENT_PALETTE_SIZE 2
 void pipe_add_segment(pipe_t* p){
 	//create new segment and add it to the queue
 	segment_t new_segment;
@@ -15,8 +17,20 @@ void pipe_add_segment(pipe_t* p){
 	segment_t* s = &new_segment;//(segment_t*)fifo_get_front_pointer(&p->segments);
 
 	//initalize it
-	segment_init(s, random_range(PIPE_MIN_SEGMENT_LENGTH, PIPE_MAX_SEGMENT_LENGTH));
-	vector3_set(s->color,random_range(0.7,1.0),random_range(0.0,0.3),random_range(0.0,0.3));
+	segment_init(s, random_range(PIPE_MIN_SEGMENT_LENGTH, PIPE_MAX_SEGMENT_LENGTH),p->textures[0]);
+	vector3_t palette[SEGMENT_PALETTE_SIZE] = {
+			{0.43921568627451,	0,	0},
+			{0.674509803921569,	0,	0}
+	};
+/*	vector3_t palette[SEGMENT_PALETTE_SIZE] = {
+			{0.43921568627451,	0,	0},
+			{0.105882352941176,	0.105882352941176,	0.105882352941176},
+			{0.674509803921569,	0,	0},
+			{0.384313725490196,	0.298039215686274,	0.215686274509804},
+			{0.47843137254902,	0.235294117647059,	0.184313725490196}
+
+	};*/
+	vector3_set_v(s->color,palette[rand()%SEGMENT_PALETTE_SIZE]);
 
 	if(fifo_size(&p->segments) > 0){
 		//we create connector
@@ -39,19 +53,27 @@ void pipe_add_segment(pipe_t* p){
 
 //as always, initalization
 void pipe_init(pipe_t* p, int forward){
+	//load textures
+	char* tex[] = {"data/pipe/tex1.bmp"};
+	glGenTextures(PIPE_TEXTURES_COUNT,p->textures);
+	int i;
+	for(i=0; i<PIPE_TEXTURES_COUNT; i++){
+		p->textures[i] = load_texture(tex[i]);
+	}
+
 	p->forward = forward;
 	body_init(&p->obj);
 	fifo_init(&p->segments,sizeof(segment_t), 2*PIPE_MAX_LENGTH);
 	//first segments
-	int i;
+
 	for(i=0; i<=p->forward ; i++)
 		pipe_add_segment(p);
-
 }
 
 //deletion
 void pipe_delete(pipe_t* p){
 	fifo_delete(&p->segments);
+	glDeleteTextures(PIPE_TEXTURES_COUNT,p->textures);
 }
 
 //refreshment

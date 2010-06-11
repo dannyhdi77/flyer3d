@@ -16,7 +16,7 @@
 #define CAMERA_DYNAMIC 3	//camera behaves like helicopter
 #define CAMERA_FIXED_ANGLES 4 //camera keeps angles, bt is able to move
 
-#define CAMERA_DELAY 60
+#define CAMERA_DELAY 120
 
 typedef struct{
 	body_t obj;

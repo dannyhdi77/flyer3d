@@ -42,6 +42,8 @@ typedef struct {
 	//rotation relative to previous segment used for connectors
 	float up_rotation, out_rotation;
 
+	//handle of texture for this segment
+	int texture;
 } segment_t;
 
 //structure that holds collision check and its result
@@ -51,7 +53,7 @@ struct collision_s{
 };
 
 //sets some basic properties
-void segment_init(segment_t*, float length);
+void segment_init(segment_t*, float length, int texture_index);
 
 //initalizes segment as connector beetween two normal segments
 void segment_init_connector(segment_t*, segment_t* prev, segment_t* next, float upr, float outr);
