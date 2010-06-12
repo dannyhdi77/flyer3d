@@ -38,6 +38,8 @@ typedef struct{
 	camera_t camera;
 	body_t teren;
 	light_t light;	//something to illuminate the scene
+
+	int score;
 } game_t;
 
 //initalizes game

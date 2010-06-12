@@ -30,8 +30,6 @@ typedef struct{
 	char n_joysticks; //number of avaliable joysticks
 
 	renderer_t renderer;	//renderer for everything
-
-	int score;
 } game_system_t;
 
 //initalizes game systems
@@ -46,10 +44,5 @@ void game_system_log(const char*);
 //takes care of state changes , etc
 void game_system_communicate(game_system_t*, int);
 
-//returns current score
-int game_system_score(game_system_t*);
-
-//adds x to score
-void game_system_score_add(game_system_t*, int);
 
 #endif /* GAME_SYSTEM_T_H_ */

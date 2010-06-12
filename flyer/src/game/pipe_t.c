@@ -18,19 +18,7 @@ void pipe_add_segment(pipe_t* p){
 
 	//initalize it
 	segment_init(s, random_range(PIPE_MIN_SEGMENT_LENGTH, PIPE_MAX_SEGMENT_LENGTH),p->textures[0]);
-	vector3_t palette[SEGMENT_PALETTE_SIZE] = {
-			{0.43921568627451,	0,	0},
-			{0.674509803921569,	0,	0}
-	};
-/*	vector3_t palette[SEGMENT_PALETTE_SIZE] = {
-			{0.43921568627451,	0,	0},
-			{0.105882352941176,	0.105882352941176,	0.105882352941176},
-			{0.674509803921569,	0,	0},
-			{0.384313725490196,	0.298039215686274,	0.215686274509804},
-			{0.47843137254902,	0.235294117647059,	0.184313725490196}
-
-	};*/
-	vector3_set_v(s->color,palette[rand()%SEGMENT_PALETTE_SIZE]);
+	vector3_set(s->color,random_range(0.4,1.0),0,0);
 
 	if(fifo_size(&p->segments) > 0){
 		//we create connector
