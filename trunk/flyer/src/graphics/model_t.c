@@ -216,7 +216,7 @@ void model_text_display(model_t* m){
 void model_display(model_t* m){
 	int i,j;
 	int a;
-	glColor3f(1.0,0.0,0.0);
+	glColor3f(1.0,0.8,0.4);
 	for(i = 0; i<m->n_poly ; i++){
 		glBegin(GL_TRIANGLE_FAN);
 			for(j=0; j <= m->polygons[i].n_vert; j++){

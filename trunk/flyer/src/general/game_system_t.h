@@ -21,6 +21,8 @@
 #define STATE_GAME 0
 #define STATE_MAIN_MENU 1
 #define STATE_INTRO 2
+#define STATE_BEST_SCORE 3
+#define STATE_DEATH 5
 #define STATE_QUIT 4
 
 //general game system data
