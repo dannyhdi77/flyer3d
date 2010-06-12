@@ -85,8 +85,8 @@ void segment_display(segment_t* s, void* nul){
 
 			glNormal3f(-cos(angle), -sin(angle),0.0);
 			//glTexCoord2f(tex_coord,0.0);
-			glVertex3f(x,y,0.0);
 			glColor3f(0.1,0.0,0.0);
+			glVertex3f(x,y,0.0);
 			//glColor3f(s->next_color[0], s->next_color[1], s->next_color[2]);
 			vector3_set(p,0.0,0.0,-SEGMENT_GAP);
 			vector3_set(normal, 0.0,0.0,0.0);
@@ -103,7 +103,6 @@ void segment_display(segment_t* s, void* nul){
 			vector3_normalize(normal);
 			glNormal3f(-normal[0], -normal[1], -normal[2]);
 			//glTexCoord2f(tex_coord,1.0);
-			glColor3f(0.1,0.0,0.0);
 			glVertex3f(p[0], p[1], p[2]);
 
 			angle += angle_step;

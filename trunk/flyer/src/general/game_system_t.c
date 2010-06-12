@@ -44,9 +44,7 @@ int game_system_init(game_system_t* sys){
 	renderer_reload(&sys->renderer);
 
 	//set inital state
-	sys->state = STATE_MAIN_MENU;
-
-	sys->score = 0;
+	sys->state = STATE_INTRO;
 	return 0;
 }
 
@@ -93,12 +91,3 @@ void game_system_communicate(game_system_t* s, int n){
 	}
 }
 
-//returns current score
-int game_system_score(game_system_t* s){
-	return s->score;
-}
-
-//adds x to score
-void game_system_score_add(game_system_t* s, int x){
-	s->score += x;
-}

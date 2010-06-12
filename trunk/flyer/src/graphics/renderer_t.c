@@ -61,7 +61,6 @@ void renderer_reload(renderer_t* r){
 
 	}
 	//enable texturing
-	glEnable(GL_TEXTURE_2D);
 
 	//set proper winding
 	glFrontFace(r->winding);

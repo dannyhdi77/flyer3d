@@ -36,7 +36,7 @@ int main(int argc, char** argv){
 
 	//create intro splash screen
 	splash_screen_t intro;
-	splash_screen_init(&intro, "data/pi.bmp" ,&system);
+	splash_screen_init(&intro, "data/czerep.bmp" ,&system);
 
 	//create main menu
 	menu_t main_menu;
