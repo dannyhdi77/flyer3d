@@ -24,6 +24,9 @@
 #define FSPEED -0.1
 #define POINT_WAIT 100
 
+#define SPEED_STEP 0.1
+#define SPEED_WAIT 1000
+
 typedef struct{
 	renderer_t renderer;	//renderer for game graphics
 	game_system_t *system;	//for state changes, etc.gs

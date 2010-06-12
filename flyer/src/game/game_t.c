@@ -170,4 +170,10 @@ void game_refresh(game_t* g, int t){
 	}
 
 	//increase speed
+	static int last_speed = 0;
+	last_speed += t;
+	if(last_speed > SPEED_WAIT){
+		last_speed = 0;
+		g->player.speed += SPEED_STEP;
+	}
 }
