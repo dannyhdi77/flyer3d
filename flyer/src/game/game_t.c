@@ -153,7 +153,7 @@ void game_refresh(game_t* g, int t){
 
 	//perform collision check
 	if(pipe_collision(&g->pipe,&g->player.object.position)){
-		game_system_communicate(g->system,0);
+		game_system_communicate(g->system,g->score);
 		game_system_t* tmp;
 		//restart game
 		tmp = g->system;

@@ -10,17 +10,37 @@
 #include <main_menu_create.h>
 #include <menu_t.h>
 #include <utilties.h>
+#include <score_screen_t.h>
+
+//command line parameters definition
+#define SHOW_FPS 0
+#define NODISPLAY 1
+#define NOREFRESH 2
+#define HELP 3
 
 int main(int argc, char** argv){
 	//parse command line arguments
-/*	int show_fps = 0;
-	if(argc = 2){
-		if(0 == strcmp("showfps", argv[1])){
-			printf("fps display active\n");
-			show_fps = 1;
+	int i;
+	char params[4] = {0,0,0,0};
+	for(i=1; i<argc; i++){
+		if(strcmp("help",argv[i]) == 0){
+			params[HELP] = 1;
+		}
+		else if(strcmp("nodisplay",argv[i]) == 0){
+			params[NODISPLAY] = 1;
+		}
+		else if(strcmp("norefresh",argv[i]) == 0){
+			params[NOREFRESH] = 1;
+		}
+		else if(strcmp("showfps",argv[i]) == 0){
+			params[SHOW_FPS] = 1;
 		}
 	}
-*/
+
+	for(i=0;i<4;i++)
+		printf("%d\n",params[i]);
+
+	return 0;
 
 	//initalize glut library, which provides
 	//function for text display
@@ -42,6 +62,11 @@ int main(int argc, char** argv){
 	menu_t main_menu;
 	main_menu_create(&main_menu);	//load menu data
 	menu_init(&main_menu, &system);
+
+	//create death and score screeens
+	score_screen_t death_screen, best_screen;
+	score_screen_init(&death_screen,"data/koniec_gry.bmp" ,&system);
+	score_screen_init(&best_screen,"data/najlepszy_wynik.bmp" ,&system);
 
 	//main loop
 	SDL_Event ev;
@@ -66,6 +91,14 @@ int main(int argc, char** argv){
 					case STATE_MAIN_MENU:
 						menu_react(&main_menu, &ev);
 					break;
+
+					case STATE_BEST_SCORE:
+						score_screen_react(&best_screen, &ev);
+					break;
+
+					case STATE_DEATH:
+						score_screen_react(&death_screen, &ev);
+					break;
 				}
 			}
 		}
@@ -88,6 +121,18 @@ int main(int argc, char** argv){
 				last_refresh_time = SDL_GetTicks();
 				menu_render(&main_menu);
 			break;
+
+			case STATE_DEATH:
+				score_screen_refresh(&death_screen, SDL_GetTicks() - last_refresh_time, system.score);
+				last_refresh_time = SDL_GetTicks();
+				score_screen_render(&death_screen);
+			break;
+
+			case STATE_BEST_SCORE:
+				score_screen_refresh(&best_screen, SDL_GetTicks() - last_refresh_time, system.best_score);
+				last_refresh_time = SDL_GetTicks();
+				score_screen_render(&best_screen);
+			break;
 		}
 
 
@@ -104,6 +149,9 @@ int main(int argc, char** argv){
 	//finish section
 	game_delete(&game);
 	splash_screen_delete(&intro);
+	menu_delete(&main_menu);
+	score_screen_delete(&best_screen);
+	score_screen_delete(&death_screen);
 	game_system_quit(NULL);
 
 }

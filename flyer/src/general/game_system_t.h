@@ -32,6 +32,10 @@ typedef struct{
 	char n_joysticks; //number of avaliable joysticks
 
 	renderer_t renderer;	//renderer for everything
+
+	int score; //score to display after death
+
+	int best_score; //best score so far
 } game_system_t;
 
 //initalizes game systems
