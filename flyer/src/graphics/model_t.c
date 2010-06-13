@@ -13,10 +13,6 @@
 
 //loads obj model from a file
 model_t* model_load(const char* filename){
-	//say what are you doing
-	printf(M_MODEL_LOADING);
-	printf(filename);
-	printf("      ");
 
 	//open model file
 	FILE* model_f = fopen(filename, "r");
@@ -163,7 +159,6 @@ model_t* model_load(const char* filename){
 	}
 	free(line);
 	fclose(model_f);
-	printf("OK\n");
 
 	return model;
 }
