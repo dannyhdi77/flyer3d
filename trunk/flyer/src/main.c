@@ -13,10 +13,9 @@
 #include <score_screen_t.h>
 
 //command line parameters definition
-#define SHOW_FPS 0
-#define NODISPLAY 1
-#define NOREFRESH 2
-#define HELP 3
+#define SHOWFPS 0
+#define NOACTION 1
+#define HELP 2
 
 int main(int argc, char** argv){
 	//parse command line arguments
@@ -26,21 +25,19 @@ int main(int argc, char** argv){
 		if(strcmp("help",argv[i]) == 0){
 			params[HELP] = 1;
 		}
-		else if(strcmp("nodisplay",argv[i]) == 0){
-			params[NODISPLAY] = 1;
-		}
-		else if(strcmp("norefresh",argv[i]) == 0){
-			params[NOREFRESH] = 1;
+		else if(strcmp("noaction",argv[i]) == 0){
+			params[NOACTION] = 1;
 		}
 		else if(strcmp("showfps",argv[i]) == 0){
-			params[SHOW_FPS] = 1;
+			params[SHOWFPS] = 1;
 		}
 	}
 
-	for(i=0;i<4;i++)
-		printf("%d\n",params[i]);
+	if(params[HELP]){
+		printf("Czerep \n\n opcje linii komend:\n noaction - nic nie jest renderowane\n showfps - pokazuje fps");
+		return 0;
+	}
 
-	return 0;
 
 	//initalize glut library, which provides
 	//function for text display
@@ -79,6 +76,7 @@ int main(int argc, char** argv){
 				game_system_quit(NULL);
 			}
 			else{
+
 				switch(system.state){
 					case STATE_GAME:
 						game_react(&game, &ev);
@@ -103,6 +101,7 @@ int main(int argc, char** argv){
 			}
 		}
 
+		if(!params[NOACTION])
 		switch(system.state){
 			case STATE_GAME:
 				game_refresh(&game, SDL_GetTicks() - last_refresh_time);
@@ -138,11 +137,13 @@ int main(int argc, char** argv){
 
 
 		//calculate fps
-		nframes++;
-		if(SDL_GetTicks() - last_fps >= 1000){
-			printf("fps: %f\n", ((float)nframes));
-			nframes = 0;
-			last_fps = SDL_GetTicks();
+		if(params[SHOWFPS]){
+			nframes++;
+			if(SDL_GetTicks() - last_fps >= 1000){
+				printf("fps: %f\n", ((float)nframes));
+				nframes = 0;
+				last_fps = SDL_GetTicks();
+			}
 		}
 	}
 
