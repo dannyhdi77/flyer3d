@@ -45,6 +45,19 @@ int game_system_init(game_system_t* sys){
 
 	//set inital state
 	sys->state = STATE_INTRO;
+
+	//read record
+	sys->best_score = 0;
+	FILE* best = fopen("data/best","r");
+	if(best == NULL){
+		best = fopen("data/best","w");
+		fprintf(best,"%d",0);
+	}
+	else{
+		fscanf(best,"%d",&sys->best_score);
+	}
+	fclose(best);
+
 	return 0;
 }
 
@@ -76,7 +89,7 @@ void game_system_communicate(game_system_t* s, int n){
 				s->state = STATE_GAME;
 				break;
 			case 3:
-				s->state = STATE_GAME;
+				s->state = STATE_BEST_SCORE;
 				break;
 			case 2:
 				s->state = STATE_GAME;
@@ -85,9 +98,19 @@ void game_system_communicate(game_system_t* s, int n){
 		//s->state = STATE_GAME;
 	}
 	else if(s->state == STATE_GAME){
-		if(n == 0){
-			s->state = STATE_MAIN_MENU;
+		s->state = STATE_DEATH;
+		s->score = n;
+		if(s->score > s->best_score){
+			s->best_score = s->score;
+			FILE* best = fopen("data/best","w");
+			if(best != NULL){
+				fprintf(best,"%d",s->best_score);
+				fclose(best);
+			}
 		}
+	}
+	else if((s->state == STATE_DEATH) || (s->state == STATE_BEST_SCORE)){
+		s->state = STATE_MAIN_MENU;
 	}
 }
 

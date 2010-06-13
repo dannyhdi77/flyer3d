@@ -3,7 +3,7 @@ CFLAGS = -g -Wall
 
 INCDIRS = -I/usr/X11R6/include `sdl-config --cflags` \
 -Isrc -Isrc/graphics -Isrc/general -Isrc/math -Isrc/game \
--Isrc/physics -Isrc/splash_screen -Isrc/menu 
+-Isrc/physics -Isrc/splash_screen -Isrc/menu -Isrc/score_screen
 
 LIBDIRS = -L/usr/X11R6/	`sdl-config --libs`
  
@@ -21,6 +21,7 @@ OBJS = $(OBJDIR)/main.o	\
 	$(OBJDIR)/graphics/load_texture.o \
 	$(OBJDIR)/general/game_system_t.o \
 	$(OBJDIR)/splash_screen/splash_screen_t.o \
+	$(OBJDIR)/score_screen/score_screen_t.o \
 	$(OBJDIR)/general/utilties.o \
 	$(OBJDIR)/general/printw.o \
 	$(OBJDIR)/game/game_t.o \

@@ -6,7 +6,7 @@
  */
 #include "model_t.h"
 
-#define MAX_LINE_LENGTH 2000
+#define MAX_LINE_LENGTH 20000
 #define MAX_POLYGONS 200000
 
 
