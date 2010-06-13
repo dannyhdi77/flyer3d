@@ -76,11 +76,9 @@ void game_system_log(const char* message){
 
 void game_system_communicate(game_system_t* s, int n){
 	if(s->state == STATE_INTRO){
-		printf("switching to MENU\n");
 		s->state = STATE_MAIN_MENU;
 	}
 	else if(s->state == STATE_MAIN_MENU){
-		printf("%d\n",n);
 		switch(n){
 			case 1:
 				s->state = STATE_QUIT;
