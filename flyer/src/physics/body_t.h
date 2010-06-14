@@ -10,8 +10,7 @@
 
 #include <vector3_t.h>
 #include <matrix44_t.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
+#include <GL/glew.h>
 #include <SDL/SDL.h>
 
 typedef struct {

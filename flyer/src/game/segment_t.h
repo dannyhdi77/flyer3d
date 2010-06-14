@@ -10,8 +10,7 @@
 
 #include <body_t.h>
 #include <math.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
+#include <GL/glew.h>
 #include <SDL/SDL.h>
 
 //settings for all segments

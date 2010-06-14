@@ -9,8 +9,7 @@
 #define LOAD_TEXTURE_H_
 
 #include <stdio.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
+#include <GL/glew.h>
 #include <SDL/SDL.h>
 
 //loads texture for us, and returns its handle

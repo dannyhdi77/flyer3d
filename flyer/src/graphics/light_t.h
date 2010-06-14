@@ -7,8 +7,7 @@
 #ifndef LIGHT_T_H_
 #define LIGHT_T_H_
 
-#include <GL/gl.h>
-#include <GL/glu.h>
+#include <GL/glew.h>
 #include <SDL/SDL.h>
 
 #include <body_t.h>
