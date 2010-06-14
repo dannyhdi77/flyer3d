@@ -7,7 +7,7 @@ INCDIRS = -I/usr/X11R6/include `sdl-config --cflags` \
 
 LIBDIRS = -L/usr/X11R6/	`sdl-config --libs`
  
-LIBS = -lX11 -lXi -lXmu -lGL -lGLU -lm -lglut
+LIBS = -lX11 -lXi -lXmu -lGL -lGLU -lm -lglut -lGLEW -lGLU
 
 OBJDIR = bin
 SRCDIR = src

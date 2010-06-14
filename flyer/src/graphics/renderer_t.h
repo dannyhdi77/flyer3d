@@ -11,8 +11,9 @@
 #ifndef RENDERER_T_H_
 #define RENDERER_T_H_
 
-#include <GL/gl.h>
-#include <GL/glu.h>
+#include <GL/glew.h>
+//#include <GL/gl.h>
+//#include <GL/glu.h>
 #include <SDL/SDL.h>
 
 #include <list_t.h>
@@ -70,6 +71,9 @@ typedef struct{
 
 	//data for screenshot creation
 	char* screenshot_file_name;
+
+	//shader programs for anaglyph rendering
+	unsigned int red_program, green_program;
 
 } renderer_t;
 

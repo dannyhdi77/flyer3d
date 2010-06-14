@@ -4,6 +4,37 @@
 int renderer_init(renderer_t* r){
 	r->screen = NULL;
 	r->screenshot_file_name = NULL;
+
+
+	//load and compile shaders
+	//read shader text
+	glewInit();
+	FILE * shadersourcef = fopen("shaders/green.fr","r");
+	char src[1000];
+	char * p = src;
+	if(shadersourcef != NULL){
+		while((*(p++) = fgetc(shadersourcef))!= EOF );
+		*--p = 0;
+		p = src;
+		fclose(shadersourcef);
+		printf("kupa\n");
+		int param;
+
+		//create shader
+
+		uint32_t green_shader = glCreateShader(GL_FRAGMENT_SHADER);
+		glShaderSource(green_shader, 1, (const char **)&p, NULL);
+		glCompileShader(green_shader);
+
+		glGetShaderiv(green_shader, GL_COMPILE_STATUS, &param);
+		if(param == GL_TRUE){
+			printf("green shader successfully compiled\n");
+		}
+		r->green_program = glCreateProgram();
+		glAttachShader(r->green_program, green_shader);
+		glLinkProgram(r->green_program);
+		//glUseProgram(r->green_program);
+	}
 	return 0 ;
 }
 
