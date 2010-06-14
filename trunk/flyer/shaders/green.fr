@@ -1,0 +1,6 @@
+//green fragment shader
+
+void main(){
+	float green = dot(gl_Color.rgb, vec3(0.3, 0.6, 0.1));
+	gl_FragColor = green*vec4(0.0, 0.1914, 0.3242, 0.5);
+}
