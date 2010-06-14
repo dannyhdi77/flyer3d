@@ -7,9 +7,9 @@
 
 #ifndef TERRAIN_T_H_
 #define TERRAIN_T_H_
-
-#include <GL/gl.h>
-#include <GL/glu.h>
+#include <GL/glew.h>
+//#include <GL/gl.h>
+//#include <GL/glu.h>
 #include <SDL/SDL.h>
 
 #include <stdio.h>

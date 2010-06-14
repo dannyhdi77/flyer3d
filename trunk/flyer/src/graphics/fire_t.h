@@ -24,8 +24,7 @@
 
 
 #include <vector3_t.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
+#include <GL/glew.h>
 #include <fifo_t.h>
 #include <body_t.h>
 #include <stdlib.h>

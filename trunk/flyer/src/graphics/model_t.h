@@ -9,7 +9,7 @@
 #include <ctype.h>
 #include <messages.h>
 #include <list_t.h>
-#include <GL/gl.h>
+#include <GL/glew.h>
 
 #ifndef MODEL_T_H_
 #define MODEL_T_H_
